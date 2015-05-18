@@ -165,10 +165,12 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebug']) {
     reports {
         xml {
             enabled true // coveralls
+            destination "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
         }
 
         html {
             enabled true
+            destination "${project.buildDir}/reports/jacoco/test/html"
         }
     }
 

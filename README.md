@@ -24,7 +24,7 @@ Gradle + Android Studio + Robolectric + Mockito + EasyMock/PowerMock + JaCoCo
    - [JaCoCo Test Coverage](http://www.eclemma.org/jacoco/)
    - [Coveralls](https://coveralls.io/)
 - **Continuous Integration:**
-   - [TravisCS](http://docs.travis-ci.com/user/languages/android/)
+   - [TravisCI](http://docs.travis-ci.com/user/languages/android/)
 
 ##### Works with the following Configurations:
  - Multiple Modules
