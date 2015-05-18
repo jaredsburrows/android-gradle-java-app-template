@@ -1,0 +1,34 @@
+language: android
+
+jdk:
+ - oraclejdk8
+
+android:
+  components:
+    - extra-android-support
+    - extra-google-google_play_services
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - build-tools-22.0.1
+    - android-22
+  licenses:
+    - '.+'
+
+script:
+ - ./gradlew clean assembleDebug testDebug -Dpre-dex=false --stacktrace
+
+after_success:
+ - ./gradlew jacocoTestReport coveralls --stacktrace
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.gradle
