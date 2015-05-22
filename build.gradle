@@ -54,6 +54,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName '1.0'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     compileOptions {
@@ -118,14 +119,20 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
 
     // Android Support Library for the CardView
-    compile 'com.android.support:cardview-v7:22.1.1' // not in use
+    compile 'com.android.support:cardview-v7:22.1.1'
 
     // Android Support Library for the RecyclerView
-    compile 'com.android.support:recyclerview-v7:22.1.1' // not in use
+    compile 'com.android.support:recyclerview-v7:22.1.1'
 
     // Google Play Services - Ads
     compile 'com.google.android.gms:play-services-ads:7.3.0'
 
+
+
+    // Espresso Instrumentation Testing
+    androidTestCompile 'com.android.support:support-annotations:22.1.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 
 
     // Fixes for Linux and Mac
@@ -151,7 +158,7 @@ dependencies {
     testCompile 'org.powermock:powermock-api-easymock:1.6.2'
 
     // Robolectric + Support v4
-    testCompile('org.robolectric:shadows-support-v4:3.0-rc2') {
+    testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }
