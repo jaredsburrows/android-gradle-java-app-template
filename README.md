@@ -1,6 +1,6 @@
 AndroidGradleTemplate [![Status](https://travis-ci.org/jaredsburrows/AndroidGradleTemplate.svg?branch=master)](https://travis-ci.org/jaredsburrows/AndroidGradleTemplate) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/AndroidGradleTemplate/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/AndroidGradleTemplate?branch=master)
 =========
-Gradle + Android Studio + Robolectric + Mockito + EasyMock/PowerMock + JaCoCo
+Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
 #### Technologies used:
 - **Building:**
@@ -16,6 +16,7 @@ Gradle + Android Studio + Robolectric + Mockito + EasyMock/PowerMock + JaCoCo
 - **Testing:**
    - [JUnit v4.12](https://github.com/junit-team/junit)
    - [Hamcrest Matchers v1.3](https://github.com/hamcrest/JavaHamcrest)
+   - [Espresso v2.1](https://code.google.com/p/android-test-kit/wiki/Espresso)
    - [Robolectric v3.0-RC2](https://github.com/robolectric/robolectric)
    - [Mockito v1.10.19](https://github.com/mockito/mockito)
    - [EasyMock v3.3.1](https://github.com/easymock/easymock)
@@ -40,6 +41,7 @@ Gradle + Android Studio + Robolectric + Mockito + EasyMock/PowerMock + JaCoCo
 ## `Android Studio` or `Intellij` Support(Simple):
 1. Import/Open this project with Android Studio/Intellij(click on `build.gradle`)
 2. Change the Build Variant Test Artifact to `Unit Tests` instead of `Instrumentation Tests`
+3. Right click a unit test located in `src/main/test` and click test
 
 ## Comand Line(Advanced):
 ##### Clone with `Git`:
