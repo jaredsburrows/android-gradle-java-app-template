@@ -14,20 +14,20 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 |Name|Version|Description|
 |---|---|---|
 | [Gradle](http://gradle.org/docs/current/release-notes) | v2.4 | Gradle build system |
-| [Android Gradle Build Tools](http://tools.android.com/tech-docs/new-build-system) | v1.2.3 | Android Gradle Plugin |
-| [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | v22.0.1 | Android Build Tools |
-| [Android Studio](http://tools.android.com/recent) or | v1.2+ | Android Studio IDE |
+| [Android Gradle Build Tools](http://tools.android.com/tech-docs/new-build-system) | v1.2.3 | Official Gradle Plugin |
+| [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | v22 | Official SDK |
+| [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | v22.0.1 | Official Build Tools |
+| [Android Studio](http://tools.android.com/recent) or | v1.2+ | Official IDE |
 | [Intellij](https://www.jetbrains.com/idea/download/) | v14.1.3+ | Intellij IDE |
 
-####Libraries:
+####Android Libraries:
 |Name|Version|Description|
 |---|---|---|
-| [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | v22 | Android SDK |
-| [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | v22.0.1 | Android Support Library API +4(SwipeRefreshLayout + ViewPager) |
-| [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | v22.0.1 | Android Support Library API +7(Material Design + Toolbar) |
-| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | v7.3.0 | Android Library for Admob, Analytics, etc
+| [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | v22.0.1 | Support Library API 4+|
+| [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | v22.0.1 | Support Library API 7+|
+| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | v7.3.0 | Admob, Analytics, etc
 
-####Testing:
+####Testing Frameworks:
 |Name|Version|Description|
 |---|---|---|
 | [JUnit](https://github.com/junit-team/junit) | v4.12 | Java Unit Testing Framework |
@@ -38,7 +38,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 | [EasyMock](https://github.com/easymock/easymock) | v3.3.1 | Mocking Framework |
 | [PowerMock](https://github.com/jayway/powermock) | v1.6.2 | Mocking Framework(can handle static methods) |
 
-####Reporting:
+####Reporting Plugins:
 |Name|Version|Description|
 |---|---|---|
 | [JaCoCo](http://www.eclemma.org/jacoco/) | v0.7.4.201502262128 | JaCoCo Test Coverage |
