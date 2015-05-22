@@ -2,35 +2,53 @@ AndroidGradleTemplate [![Status](https://travis-ci.org/jaredsburrows/AndroidGrad
 =========
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
-#### Technologies used:
-- **Building:**
-   - [Gradle v2.4](http://gradle.org/docs/current/release-notes)
-   - [Android Studio v1.2+](http://tools.android.com/recent)
-   - [Android Gradle Build Tools v1.2.3](http://tools.android.com/tech-docs/new-build-system) or [Intellij v14.1.3+](https://www.jetbrains.com/idea/download/)
-   - [Android SDK Build Tools v22.0.1](http://developer.android.com/tools/revisions/build-tools.html)
-- **Libraries:**
-   - [Android SDK v22](http://developer.android.com/tools/revisions/platforms.html#5.1)
-   - [Android Support-v4 v22.0.1](http://developer.android.com/tools/support-library/features.html#v4)
-   - [Android AppCompat-v7 v22.0.1](http://developer.android.com/tools/support-library/features.html#v7-appcompat)
-   - [Android Google Play Services v7.3.0](https://developer.android.com/google/play-services/index.html)
-- **Testing:**
-   - [JUnit v4.12](https://github.com/junit-team/junit)
-   - [Hamcrest Matchers v1.3](https://github.com/hamcrest/JavaHamcrest)
-   - [Espresso v2.1](https://code.google.com/p/android-test-kit/wiki/Espresso)
-   - [Robolectric v3.0-RC2](https://github.com/robolectric/robolectric)
-   - [Mockito v1.10.19](https://github.com/mockito/mockito)
-   - [EasyMock v3.3.1](https://github.com/easymock/easymock)
-   - [PowerMock v1.6.2](https://github.com/jayway/powermock)
-- **Reporting:**
-   - [JaCoCo Test Coverage](http://www.eclemma.org/jacoco/)
-   - [Coveralls](https://coveralls.io/)
-- **Continuous Integration:**
-   - [TravisCI](http://docs.travis-ci.com/user/languages/android/)
-
 ##### Works with the following Configurations:
  - Multiple Modules
  - Multiple Flavors
  - Android Libraries
+
+<img src="images/test_and_dependencies.png" />
+
+## Technologies used:
+#### Build Tools:
+|Name|Version|Description|
+|---|---|---|
+| [Gradle](http://gradle.org/docs/current/release-notes) | v2.4 | Gradle build system |
+| [Android Gradle Build Tools](http://tools.android.com/tech-docs/new-build-system) | v1.2.3 | Android Gradle Plugin |
+| [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | v22.0.1 | Android Build Tools |
+| [Android Studio](http://tools.android.com/recent) or | v1.2+ | Android Studio IDE |
+| [Intellij](https://www.jetbrains.com/idea/download/) | v14.1.3+ | Intellij IDE |
+
+####Libraries:
+|Name|Version|Description|
+|---|---|---|
+| [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | v22 | Android SDK |
+| [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | v22.0.1 | Android Support Library API +4(SwipeRefreshLayout + ViewPager) |
+| [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | v22.0.1 | Android Support Library API +7(Material Design + Toolbar) |
+| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | v7.3.0 | Android Library for Admob, Analytics, etc
+
+####Testing:
+|Name|Version|Description|
+|---|---|---|
+| [JUnit](https://github.com/junit-team/junit) | v4.12 | Java Unit Testing Framework |
+| [Hamcrest](https://github.com/hamcrest/JavaHamcrest) | v1.3 | Matchers for Unit Tests |
+| [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso) | v2.1 | Google's *New* Instrumentation Framework |
+| [Robolectric](https://github.com/robolectric/robolectric) | v3.0-RC3 | Best Unit Testing Framework for Android |
+| [Mockito](https://github.com/mockito/mockito) | v1.10.19 | Mocking Framework |
+| [EasyMock](https://github.com/easymock/easymock) | v3.3.1 | Mocking Framework |
+| [PowerMock](https://github.com/jayway/powermock) | v1.6.2 | Mocking Framework(can handle static methods) |
+
+####Reporting:
+|Name|Version|Description|
+|---|---|---|
+| [JaCoCo](http://www.eclemma.org/jacoco/) | v0.7.4.201502262128 | JaCoCo Test Coverage |
+| [Coveralls](https://coveralls.io/) | N/A | Hosts test reports published from TravisCI |
+
+####Continuous Integration:
+|Name|Description|
+|---|---|
+| [TravisCI](http://docs.travis-ci.com/user/languages/android/) | Build Server(Builds, Tests, Publishes reports to Coveralls) |
+
 
 # Getting Started:
  - [View JUnit and Hamcrest Tests](src/test/java/burrows/apps/example/template/util/AdUtilsTest.java)
