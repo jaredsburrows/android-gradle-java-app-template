@@ -33,10 +33,10 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 | [JUnit](https://github.com/junit-team/junit) | v4.12 | Java Unit Testing Framework |
 | [Hamcrest](https://github.com/hamcrest/JavaHamcrest) | v1.3 | Matchers for Unit Tests |
 | [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso) | v2.1 | Google's *New* Instrumentation Framework |
-| [Robolectric](https://github.com/robolectric/robolectric) | v3.0-RC3 | Best Unit Testing Framework for Android |
+| [Robolectric](https://github.com/robolectric/robolectric) | v3.0-RC3 | Unit Testing Framework |
 | [Mockito](https://github.com/mockito/mockito) | v1.10.19 | Mocking Framework |
 | [EasyMock](https://github.com/easymock/easymock) | v3.3.1 | Mocking Framework |
-| [PowerMock](https://github.com/jayway/powermock) | v1.6.2 | Mocking Framework(can handle static methods) |
+| [PowerMock](https://github.com/jayway/powermock) | v1.6.2 | Mocking Framework(static method support) |
 
 ####Reporting Plugins:
 |Name|Version|Description|
@@ -57,9 +57,15 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - [View EasyMock/PowerMock Tests](src/test/java/burrows/apps/example/template/util/PlayServicesUtilsTest.java)
 
 ## `Android Studio` or `Intellij` Support(Simple):
-1. Import/Open this project with Android Studio/Intellij(click on `build.gradle`)
-2. Change the Build Variant Test Artifact to `Unit Tests` instead of `Instrumentation Tests`
-3. Right click a unit test located in `src/main/test` and click test
+ - **Import/Open this project with Android Studio/Intellij(click on `build.gradle`)**
+
+ - **Instrumentation Tests:**
+  - Change the Build Varient Test Artifact to `Instrumentation Tests` 
+  - Right click an instrumentation test located in `src/main/androidTest` and click test
+
+ - **Unit Tests:**
+  - Change the Build Variant Test Artifact to `Unit Tests`
+  - Right click a unit test located in `src/main/test` and click test
 
 ## Comand Line(Advanced):
 ##### Clone with `Git`:
@@ -72,16 +78,20 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Install and Run the `debug flavor` on your Android Device:**
    - `gradlew runDebug` 
 
-##### Testing with `Gradle`:
- - **Run all tests in all `flavors`:**
+##### Running Instrumentation Tests with `Gradle`:
+ - **Run all instrumentation tests in all `flavors`:**
+   - `gradlew connectedAndroidTest`
+ 
+##### Running Unit Tests with `Gradle`:
+ - **Run all unit tests in all `flavors`:**
    - `gradlew test`
- - **Run single test in all `flavors`:**
+ - **Run a single unit test in all `flavors`:**
    - `gradlew test --tests="*MainActivityTest*"`
- - **Run all the `debug flavor` tests:**
+ - **Run all unit `debug flavor` tests:**
    - `gradlew testDebug`
- - **Run single test in the `debug flavor`:**
+ - **Run a single unit test in the `debug flavor`:**
    - `gradlew testDebug --tests="*MainActivityTest*"`
- - **Run single test in the `debug flavor` with `Jacoco` test reports:**
+ - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
    - `gradlew testDebug --tests="*MainActivityTest*" jacocoTestReport`
 
 License
