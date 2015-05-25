@@ -51,10 +51,10 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 
 
 # Getting Started:
- - [View JUnit and Hamcrest Tests](src/test/java/burrows/apps/example/template/util/AdUtilsTest.java)
- - [View Robolectric Activity Tests](src/test/java/burrows/apps/example/template/activity/MainActivityTest.java)
- - [View Robolectric Fragment Tests](src/test/java/burrows/apps/example/template/fragment/PlaceHolderFragmentTest.java)
- - [View EasyMock/PowerMock Tests](src/test/java/burrows/apps/example/template/util/PlayServicesUtilsTest.java)
+ - [View JUnit and Hamcrest Tests](Example-AllLibraries/src/test/java/burrows/apps/example/template/util/AdUtilsTest.java)
+ - [View Robolectric Activity Tests](Example-AllLibraries/src/test/java/burrows/apps/example/template/activity/MainActivityTest.java)
+ - [View Robolectric Fragment Tests](Example-AllLibraries/src/test/java/burrows/apps/example/template/fragment/PlaceHolderFragmentTest.java)
+ - [View EasyMock/PowerMock Tests](Example-AllLibraries/src/test/java/burrows/apps/example/template/util/PlayServicesUtilsTest.java)
 
 ## `Android Studio` or `Intellij` Support(Simple):
  - **Import/Open this project with Android Studio/Intellij(click on `build.gradle`)**

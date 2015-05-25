@@ -1,4 +1,4 @@
-package burrows.apps.example.template;
+package burrows.apps.example.template.instrumentation;
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -11,7 +11,7 @@ import burrows.apps.example.template.activity.MainActivity;
  * <p/>
  * To run this test, you can type:
  * adb shell am instrument -w \
- * -e class burrows.apps.example.template.MainActivityTest \
+ * -e class burrows.apps.example.template.instrumentation.MainActivityTest \
  * burrows.apps.example.template.tests/android.test.InstrumentationTestRunner
  */
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
