@@ -49,6 +49,10 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 |---|---|
 | [TravisCI](http://docs.travis-ci.com/user/languages/android/) | Build Server(Builds, Tests, Publishes reports to Coveralls) |
 
+####Publishing to Google Play:
+|Name|Version|Description|
+|---|---|---|
+| [Gradle-play-publisher](https://github.com/Triple-T/gradle-play-publisher) | 1.1.0 | Publishes your app to Google Play |
 
 # Getting Started:
  - [View JUnit and Hamcrest Tests](Example-AllLibraries/src/test/java/burrows/apps/example/template/util/AdUtilsTest.java)
@@ -78,7 +82,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Install and Run the `debug flavor` on your Android Device:**
    - `gradlew runDebug` 
 
-##### Running Instrumentation Tests with `Gradle`:
+##### Running Instrumentation/Espresso Tests with `Gradle`:
  - **Run all instrumentation tests in all `flavors`:**
    - `gradlew connectedAndroidTest`
  

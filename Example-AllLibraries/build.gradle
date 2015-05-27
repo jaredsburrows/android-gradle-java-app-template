@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'com.github.triplet.play'
 
 android {
     compileSdkVersion 22
@@ -83,6 +84,14 @@ android.applicationVariants.all { variant ->
             }
         }
     }
+}
+
+// publishing to google play
+// https://developers.google.com/android-publisher/getting_started
+play {
+    serviceAccountEmail = 'jaredsburrows@gmail.com'
+    pk12File = file('key.p12')
+    track = 'production' // or 'beta' or 'alpha'
 }
 
 dependencies {
