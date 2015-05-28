@@ -15,7 +15,7 @@ android:
     - '.+'
 
 script:
- - ./gradlew clean assembleDebug testDebug -Dpre-dex=false --stacktrace
+ - ./gradlew clean assemble test -Dpre-dex=false --stacktrace
 
 after_success:
  - ./gradlew jacocoTestReport coveralls --stacktrace

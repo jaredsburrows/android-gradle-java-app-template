@@ -1,4 +1,7 @@
 rootProject.name = 'AndroidGradleTemplate'
 
 include ':Example-AllLibraries'
+include ':Example-Mockito'
 include ':Example-Robolectric'
+include ':Example-RobolectricEasyMockPowerMock'
+include ':Example-RobolectricFlavors'
