@@ -15,14 +15,10 @@ android:
     - '.+'
 
 script:
- - ./gradlew clean assemble test -Dpre-dex=false --stacktrace
+ - ./gradlew clean assembleDebug testDebugUnitTest -Dpre-dex=false --stacktrace
 
 after_success:
  - ./gradlew jacocoTestReport coveralls --stacktrace
-
-branches:
-  except:
-    - gh-pages
 
 notifications:
   email: false

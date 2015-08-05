@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'android-command'
 apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.noveogroup.android.check'
 
 android {
     compileSdkVersion 22
@@ -55,37 +56,6 @@ android {
     }
 }
 
-// Running the APK on your Android Device
-android.applicationVariants.all { variant ->
-    if (variant.install) {
-        tasks.create(name: "run${variant.name.capitalize()}", type: Exec,
-                dependsOn: variant.install) {
-            group = 'Run'
-            description "Installs and Runs the APK for ${variant.description}."
-            def getMainActivity = { file ->
-                new XmlSlurper().parse(file).application.activity.find {
-                    it.'intent-filter'.find { filter ->
-                        return filter.action.find {
-                            it.'@android:name'.text() == 'android.intent.action.MAIN'
-                        } \
-                             && filter.category.find {
-                            it.'@android:name'.text() == 'android.intent.category.LAUNCHER'
-                        }
-                    }
-                }.'@android:name'
-            }
-            doFirst {
-                def activityClass =
-                        getMainActivity(variant.outputs.processManifest.manifestOutputFile)
-                commandLine android.adbExe, 'shell', 'am', 'start', '-n',
-                        "${variant.applicationId}/${activityClass}"
-
-                // or without the XML hacking: commandLine android.adbExe, 'shell', 'monkey', '-p', variant.applicationId, '1'
-            }
-        }
-    }
-}
-
 // publishing to google play
 // https://developers.google.com/android-publisher/getting_started
 play {
@@ -96,21 +66,21 @@ play {
 
 dependencies {
     // Android Support Library for AppCompat
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
 
     // Android Support Library for the CardView
-    compile 'com.android.support:cardview-v7:22.1.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
 
     // Android Support Library for the RecyclerView
-    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
 
     // Google Play Services - Ads
-    compile 'com.google.android.gms:play-services-ads:7.3.0'
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
 
 
 
     // Espresso Instrumentation Testing
-    androidTestCompile 'com.android.support:support-annotations:22.1.1'
+    androidTestCompile 'com.android.support:support-annotations:22.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 
@@ -139,14 +109,12 @@ dependencies {
     testCompile 'org.powermock:powermock-api-easymock:1.6.2'
 
     // Robolectric + Support v4
-    testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
-    }
+    testCompile 'org.robolectric:shadows-play-services:3.0'
+    testCompile 'org.robolectric:shadows-support-v4:3.0'
 }
 
 // JaCoCo Test Reports, thanks to Nenick
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebug']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUniTest']) {
     group = 'Reporting'
     description = 'Generate Jacoco coverage reports after running tests.'
 

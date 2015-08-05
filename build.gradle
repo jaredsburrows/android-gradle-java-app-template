@@ -5,10 +5,16 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.9'
+        // android gradle plugin
+        classpath 'com.android.tools.build:gradle:1.3.0'
+        // android command plugin
+        classpath 'com.novoda:gradle-android-command-plugin:1.5.0'
+        // static analysis
+        classpath 'com.noveogroup.android:check:1.1.2'
+        // publish to google play store
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.2'
+        // check for plugin updates
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
     }
 }
 
@@ -23,7 +29,7 @@ allprojects {
 
     // Specify latest jacoco, else use default
     jacoco {
-        version '0.7.4.201502262128'
+        version '0.7.5.201505241946'
     }
 
     tasks.withType(JavaCompile) {

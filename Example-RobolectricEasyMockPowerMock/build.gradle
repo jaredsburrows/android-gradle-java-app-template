@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-command'
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.noveogroup.android.check'
 
 android {
     compileSdkVersion 22
@@ -10,6 +13,21 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName '1.0'
+        // for espresso tests
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    // JNI support - must run ndk-build
+    sourceSets {
+        main {
+            jni {
+                srcDirs = []
+            }
+
+            jniLibs {
+                srcDir 'src/main/libs'
+            }
+        }
     }
 
     compileOptions {
@@ -38,18 +56,35 @@ android {
     }
 }
 
+// publishing to google play
+// https://developers.google.com/android-publisher/getting_started
+play {
+    serviceAccountEmail = 'jaredsburrows@gmail.com'
+    pk12File = file('key.p12')
+    track = 'production' // or 'beta' or 'alpha'
+}
+
 dependencies {
     // Android Support Library for AppCompat
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.2.1'
 
     // Android Support Library for the CardView
-    compile 'com.android.support:cardview-v7:22.1.1'
+    compile 'com.android.support:cardview-v7:22.2.1'
 
     // Android Support Library for the RecyclerView
-    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:recyclerview-v7:22.2.1'
 
     // Google Play Services - Ads
-    compile 'com.google.android.gms:play-services-ads:7.3.0'
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
+
+
+
+    // Espresso Instrumentation Testing
+    androidTestCompile 'com.android.support:support-annotations:22.2.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
+    androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+
+
 
     // Fixes for Linux and Mac
     testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
@@ -59,6 +94,9 @@ dependencies {
 
     // Hamcrest Matchers for Junit
     testCompile 'org.hamcrest:hamcrest-integration:1.3'
+
+    // Mockito
+    testCompile 'org.mockito:mockito-core:1.10.19'
 
     // EasyMock
     testCompile 'org.easymock:easymock:3.3.1'
@@ -71,8 +109,37 @@ dependencies {
     testCompile 'org.powermock:powermock-api-easymock:1.6.2'
 
     // Robolectric + Support v4
-    testCompile('org.robolectric:shadows-support-v4:3.0-rc3') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    testCompile 'org.robolectric:shadows-play-services:3.0'
+    testCompile 'org.robolectric:shadows-support-v4:3.0'
+}
+
+// JaCoCo Test Reports, thanks to Nenick
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUniTest']) {
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+
+    reports {
+        xml {
+            enabled true // coveralls
+            destination "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+        }
+
+        html {
+            enabled true
+            destination "${project.buildDir}/reports/jacoco/test/html"
+        }
     }
+
+    // use hidden configuration, for details look into JacocoPlugin.groovy
+    jacocoClasspath = project.configurations['androidJacocoAnt']
+
+    // exclude auto-generated classes and tests
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
+                      'android/**/*.*']
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
 }

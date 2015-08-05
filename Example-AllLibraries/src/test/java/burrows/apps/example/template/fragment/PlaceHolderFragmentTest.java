@@ -19,8 +19,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
-import static org.robolectric.util.SupportFragmentTestUtil.startFragment;
-import static org.robolectric.util.SupportFragmentTestUtil.startVisibleFragment;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startFragment;
+import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startVisibleFragment;
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>

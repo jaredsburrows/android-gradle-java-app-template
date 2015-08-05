@@ -13,19 +13,19 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 #### Build Tools:
 |Name|Version|Description|
 |---|---|---|
-| [Gradle](http://gradle.org/docs/current/release-notes) | 2.4 | Gradle build system |
+| [Gradle](http://gradle.org/docs/current/release-notes) | 2.5 | Gradle build system |
 | [Android Gradle Build Tools](http://tools.android.com/tech-docs/new-build-system) | 1.2.3 | Official Gradle Plugin |
 | [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | 22 | Official SDK |
 | [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | 22.0.1 | Official Build Tools |
-| [Android Studio](http://tools.android.com/recent) or | 1.2+ | Official IDE |
+| [Android Studio](http://tools.android.com/recent) or | 1.3+ | Official IDE |
 | [Intellij](https://www.jetbrains.com/idea/download/) | 14.1.3+ | Intellij IDE |
 
 ####Android Libraries:
 |Name|Version|Description|
 |---|---|---|
-| [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | 22.0.1 | Support Library API 4+|
-| [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | 22.0.1 | Support Library API 7+|
-| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | 7.3.0 | Admob, Analytics, etc
+| [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | 22.2.1 | Support Library API 4+|
+| [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | 22.2.1 | Support Library API 7+|
+| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | 7.5.0 | Admob, Analytics, etc
 
 ####Testing Frameworks:
 |Name|Version|Description|
@@ -33,7 +33,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 | [JUnit](https://github.com/junit-team/junit) | 4.12 | Java Unit Testing Framework |
 | [Hamcrest](https://github.com/hamcrest/JavaHamcrest) | 1.3 | Matchers for Unit Tests |
 | [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso) | 2.1 | Google's *New* Instrumentation Framework |
-| [Robolectric](https://github.com/robolectric/robolectric) | 3.0-RC3 | Unit Testing Framework |
+| [Robolectric](https://github.com/robolectric/robolectric) | 3.0 | Unit Testing Framework |
 | [Mockito](https://github.com/mockito/mockito) | 1.10.19 | Mocking Framework |
 | [EasyMock](https://github.com/easymock/easymock) | 3.3.1 | Mocking Framework |
 | [PowerMock](https://github.com/jayway/powermock) | 1.6.2 | Mocking Framework(static method support) |

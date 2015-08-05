@@ -56,11 +56,6 @@ public class PlayServicesUtilsTest {
         assertThat(playServicesUtils, not(nullValue()));
     }
 
-//    @After
-//    public void tearDown() {
-//        verifyAll();
-//    }
-
     @Test
     public void test_success() {
         mockStatic(GooglePlayServicesUtil.class);
