@@ -92,11 +92,11 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Run a single unit test in all `flavors`:**
    - `gradlew test --tests="*MainActivityTest*"`
  - **Run all unit `debug flavor` tests:**
-   - `gradlew testDebug`
+   - `gradlew testDebugUnitTest`
  - **Run a single unit test in the `debug flavor`:**
-   - `gradlew testDebug --tests="*MainActivityTest*"`
+   - `gradlew testDebugUnitTest --tests="*MainActivityTest*"`
  - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
-   - `gradlew testDebug --tests="*MainActivityTest*" jacocoTestReport`
+   - `gradlew testDebugUnitTest --tests="*MainActivityTest*" jacocoTestReport`
 
 License
 =========
