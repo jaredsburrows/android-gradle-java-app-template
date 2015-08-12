@@ -114,7 +114,7 @@ dependencies {
 }
 
 // JaCoCo Test Reports, thanks to Nenick
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUniTest']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
     group = 'Reporting'
     description = 'Generate Jacoco coverage reports after running tests.'
 
