@@ -9,16 +9,16 @@ android:
     - extra-google-google_play_services
     - extra-android-m2repository
     - extra-google-m2repository
-    - build-tools-22.0.1
-    - android-22
+    - build-tools-23.0.0
+    - android-23
   licenses:
     - '.+'
 
 script:
- - ./gradlew clean assembleDebug testDebugUnitTest -Dpre-dex=false --stacktrace
+ - ./gradlew clean assembleDebug testDebugUnitTest --stacktrace
 
 after_success:
- - ./gradlew jacocoTestReport coveralls --stacktrace
+ - ./gradlew :example:all-libraries:jacocoTestReport :example:all-libraries:coveralls --stacktrace
 
 notifications:
   email: false
