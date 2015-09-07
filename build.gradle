@@ -12,11 +12,11 @@ buildscript {
         // static analysis
         classpath 'com.noveogroup.android:check:1.1.2'
         // publish to google play store
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.2'
+        classpath 'com.github.triplet.gradle:play-publisher:1.1.3'
         // check for plugin updates
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
         // code coverage
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
 
@@ -135,7 +135,7 @@ configure(project(':example').subprojects) {
         compile 'com.android.support:recyclerview-v7:23.0.1'
 
         // Google Play Services - Ads
-        compile 'com.google.android.gms:play-services-ads:7.5.0' // 7.8.0
+        compile 'com.google.android.gms:play-services-ads:7.5.0' // 7.8.0 - admob issue
 
 
 
@@ -145,9 +145,6 @@ configure(project(':example').subprojects) {
         androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 
 
-
-        // Fixes for Linux and Mac
-        testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
 
         // Junit
         testCompile 'junit:junit:4.12'
