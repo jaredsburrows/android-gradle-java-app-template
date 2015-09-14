@@ -18,7 +18,7 @@ script:
  - ./gradlew clean assembleDebug testDebugUnitTest --stacktrace
 
 after_success:
- - ./gradlew :example:all-libraries:jacocoTestReport :example:all-libraries:coveralls --stacktrace
+ - ./gradlew :app:all-libraries:jacocoReport :app:all-libraries:coveralls --stacktrace
 
 notifications:
   email: false
@@ -28,3 +28,4 @@ sudo: false
 cache:
   directories:
     - $HOME/.gradle
+
