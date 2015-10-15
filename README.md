@@ -60,7 +60,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Import/Open this project with Android Studio/Intellij(click on `build.gradle`)**
 
  - **Instrumentation Tests:**
-  - Change the Build Varient Test Artifact to `Instrumentation Tests` 
+  - Change the Build Variant Test Artifact to `Instrumentation Tests` 
   - Right click an instrumentation test located in `src/main/androidTest` and click test
 
  - **Unit Tests:**
