@@ -17,10 +17,7 @@ android:
     - '.+'
 
 script:
- - ./gradlew clean assembleDebug testDebug --stacktrace
-
-after_success:
- - ./gradlew :app:all-libraries:jacocoReport :app:all-libraries:coveralls --stacktrace
+ - ./gradlew clean assembleDebug testDebug :app:all-libraries:jacocoDebugReport :app:all-libraries:coveralls --stacktrace
 
 notifications:
   email: false
