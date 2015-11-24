@@ -24,7 +24,7 @@ android:
 # - adb shell input keyevent 82 &
 
 script:
- - ./gradlew clean assembleDebug assembleAndroidTest testDebug connectedDebugAndroidTest :app:all-libraries:jacocoDebugReport :app:all-libraries:coveralls --stacktrace
+    - ./gradlew clean testDebug :app:all-libraries:connectedDebugAndroidTest :app:all-libraries:jacocoDebugReport :app:all-libraries:coveralls --stacktrace
 
 notifications:
   email: false
