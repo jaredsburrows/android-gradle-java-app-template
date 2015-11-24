@@ -1,8 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" } // official gradle plugins
+        maven { url 'https://plugins.gradle.org/m2/' } // official gradle plugins
     }
 
     dependencies {
@@ -26,6 +25,7 @@ buildscript {
 }
 
 configure(project(':app').subprojects) {
+    apply from: rootProject.file('commonProject.gradle')
     apply plugin: 'com.android.application'
     apply plugin: 'android-command'
     apply plugin: 'com.github.triplet.play'
@@ -57,7 +57,7 @@ configure(project(':app').subprojects) {
 
         buildTypes.release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
     }
@@ -83,18 +83,24 @@ configure(project(':app').subprojects) {
         compile 'com.google.android.gms:play-services-ads:7.5.0' // 8.3.0 - need robolectric shadows
 
         // Espresso Instrumentation Testing
+        // androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+        // androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
         androidTestCompile 'com.android.support:support-annotations:23.1.1'
-        androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-        androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
+        androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+            exclude module: 'appcompat'
+            exclude module: 'support-v4'
+            exclude module: 'recyclerview-v7'
+        } 
 
         // Unit Tests
         testCompile project(':lib:test')
     }
 
-    apply from: "${rootProject.getRootDir()}/common.gradle"
+    apply from: rootProject.file('commonAndroid.gradle')
 }
 
 configure(project(':lib').subprojects) {
+    apply from: rootProject.file('commonProject.gradle')
     apply plugin: 'com.android.library'
 
     dependencies {
@@ -146,5 +152,5 @@ configure(project(':lib').subprojects) {
         disable 'UnusedResources', 'LogConditional'
     }
 
-    apply from: "${rootProject.getRootDir()}/common.gradle"
+    apply from: rootProject.file('commonAndroid.gradle')
 }

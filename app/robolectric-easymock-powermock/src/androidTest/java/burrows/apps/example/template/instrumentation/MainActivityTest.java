@@ -1,22 +1,24 @@
 package burrows.apps.example.template.instrumentation;
 
-import android.test.ActivityInstrumentationTestCase2;
+import android.support.test.rule.ActivityTestRule;
+
+import org.junit.Rule;
+import org.junit.Test;
 
 import burrows.apps.example.template.activity.MainActivity;
 
-/**
- * This is a simple framework for a test of an Application.  See
- * {@link android.test.ApplicationTestCase ApplicationTestCase} for more information on
- * how to write and extend Application tests.
- * <p/>
- * To run this test, you can type:
- * adb shell am instrument -w \
- * -e class burrows.apps.example.template.instrumentation.MainActivityTest \
- * burrows.apps.example.template.tests/android.test.InstrumentationTestRunner
- */
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
-    public MainActivityTest() {
-        super(MainActivity.class);
+public class MainActivityTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> activity = new ActivityTestRule<>(MainActivity.class);
+
+    @Test
+    public void shouldDisplayMainScreenWithCorrectTitle() {
+        onView(withText("AndroidGradleTemplate")).check(matches(isDisplayed()));
     }
 }
