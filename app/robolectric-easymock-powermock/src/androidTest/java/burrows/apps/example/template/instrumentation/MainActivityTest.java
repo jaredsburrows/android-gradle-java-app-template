@@ -17,7 +17,6 @@ import burrows.apps.example.template.activity.MainActivity;
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public MainActivityTest() {
-        super("burrows.apps.example.template", MainActivity.class);
+        super(MainActivity.class);
     }
-
 }

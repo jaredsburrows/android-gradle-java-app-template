@@ -32,7 +32,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 |---|---|
 | [JUnit](https://github.com/junit-team/junit) | Java Unit Testing Framework |
 | [Hamcrest](https://github.com/hamcrest/JavaHamcrest) | Matchers for Unit Tests |
-| [Espresso](https://code.google.com/p/android-test-kit/wiki/Espresso) | Google's *New* Instrumentation Framework |
+| [Espresso](https://google.github.io/android-testing-support-library/) | Google's *New* Instrumentation Framework |
 | [Robolectric](https://github.com/robolectric/robolectric) | Unit Testing Framework |
 | [Mockito](https://github.com/mockito/mockito) | Mocking Framework |
 | [EasyMock](https://github.com/easymock/easymock) | Mocking Framework |
@@ -81,6 +81,8 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 ##### Running Instrumentation/Espresso Tests with `Gradle`:
  - **Run all instrumentation tests in all `flavors`:**
    - `gradlew connectedAndroidTest`
+ - **Run all instrumentation `debug flavor` tests:**
+   - `gradlew connectedDebugAndroidTest`
  
 ##### Running Unit Tests with `Gradle`:
  - **Run all unit tests in all `flavors`:**
@@ -88,11 +90,11 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Run a single unit test in all `flavors`:**
    - `gradlew test --tests="*MainActivityTest*"`
  - **Run all unit `debug flavor` tests:**
-   - `gradlew testDebugUnitTest`
+   - `gradlew testDebug`
  - **Run a single unit test in the `debug flavor`:**
-   - `gradlew testDebugUnitTest --tests="*MainActivityTest*"`
+   - `gradlew testDebug --tests="*MainActivityTest*"`
  - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
-   - `gradlew testDebugUnitTest --tests="*MainActivityTest*" jacocoTestReport`
+   - `gradlew testDebug --tests="*MainActivityTest*" jacocoTestReport`
 
 License
 =========

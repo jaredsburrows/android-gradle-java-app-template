@@ -128,6 +128,12 @@ configure(project(':lib').subprojects) {
                 exclude module: 'support-v4'
                 exclude module: 'support-annotations'
             }
+
+			// Need Robolectric 3.1 shadows you GPS 7.8.0+
+            compile ('com.google.android.gms:play-services-ads:7.5.0') { // robolectric 3.1 needs to be released
+                exclude module: 'support-v4'
+                exclude module: 'support-annotations'
+            }
         }
 
         // only apply testing project to all other projects
