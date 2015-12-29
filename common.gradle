@@ -4,6 +4,7 @@ repositories {
 
 apply plugin: 'net.ltgt.errorprone'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.github.kt3k.coveralls'
 
 tasks.withType(JavaCompile) {
     // Show all warnings except boot classpath
