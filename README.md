@@ -1,4 +1,4 @@
-AndroidGradleTemplate [![Status](https://travis-ci.org/jaredsburrows/AndroidGradleTemplate.svg?branch=master)](https://travis-ci.org/jaredsburrows/AndroidGradleTemplate) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/AndroidGradleTemplate/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/AndroidGradleTemplate?branch=master)
+AndroidGradleTemplate [![Status](https://travis-ci.org/jaredsburrows/android-gradle-java-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-java-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-java-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-java-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
