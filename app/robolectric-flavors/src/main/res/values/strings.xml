@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources,TypographyDashes">
-    <string name="app_name">AndroidGradleTemplate</string>
-    <string name="app_analytics" translatable="false"></string>
-    <string name="app_ad" translatable="false">ca-app-pub-7025090077419387/4814239814</string>
-
-    <string name="button_launch_interstitial">Launch New Interstitial</string>
-</resources>

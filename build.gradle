@@ -24,18 +24,17 @@ buildscript {
     }
 }
 
-configure(project(':app').subprojects) {
+configure(project('app')) {
     apply plugin: 'com.android.application'
     apply plugin: 'android-command'
     apply plugin: 'com.github.triplet.play'
     apply plugin: 'com.getkeepsafe.dexcount'
     apply plugin: 'com.vanniktech.android.apk.size'
+    apply from: rootProject.file('common.gradle')
 
     android {
         defaultConfig {
             applicationId 'burrows.apps.example.template'
-            minSdkVersion 9
-            targetSdkVersion 23
             versionCode 1
             versionName '1.0'
             // for espresso tests
@@ -56,7 +55,8 @@ configure(project(':app').subprojects) {
 
         buildTypes.release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro')
             signingConfig signingConfigs.debug
         }
     }
@@ -84,24 +84,25 @@ configure(project(':app').subprojects) {
         // compile 'com.google.android.gms:play-services-base:8.4.0'
 
         // Espresso Instrumentation Testing
-        // androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-        // androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
         androidTestCompile 'com.android.support:support-annotations:23.1.1'
         androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
             exclude module: 'appcompat'
             exclude module: 'support-v4'
             exclude module: 'recyclerview-v7'
-        } 
+        }
 
         // Unit Tests
-        testCompile project(':lib:test')
+        testCompile project(':test-lib')
     }
-
-    apply from: rootProject.file('common.gradle')
 }
 
-configure(project(':lib').subprojects) {
+configure(project('test-lib')) {
     apply plugin: 'com.android.library'
+    apply from: rootProject.file('common.gradle')
+
+    android.lintOptions {
+        disable 'UnusedResources', 'LogConditional'
+    }
 
     dependencies {
         // testing
@@ -135,8 +136,9 @@ configure(project(':lib').subprojects) {
                 exclude module: 'support-annotations'
             }
 
-			// Need Robolectric 3.1 shadows you GPS 7.8.0+
-            compile ('com.google.android.gms:play-services-ads:7.5.0') { // robolectric 3.1 needs to be released
+            // Need Robolectric 3.1 shadows you GPS 7.8.0+
+            compile('com.google.android.gms:play-services-ads:7.5.0') {
+                // robolectric 3.1 needs to be released
                 exclude module: 'support-v4'
                 exclude module: 'support-annotations'
             }
@@ -144,13 +146,7 @@ configure(project(':lib').subprojects) {
 
         // only apply testing project to all other projects
         if (!name.contains('test')) {
-            testCompile project(':lib:test')
+            testCompile project(':test-lib')
         }
     }
-
-    android.lintOptions {
-        disable 'UnusedResources', 'LogConditional'
-    }
-
-    apply from: rootProject.file('common.gradle')
 }

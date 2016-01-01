@@ -13,19 +13,11 @@ android:
     - extra-google-google_play_services
     - extra-android-m2repository
     - extra-google-m2repository
-    - sys-img-armeabi-v7a-android-23
   licenses:
     - '.+'
 
-#before_script:
-# - echo no | android create avd --force -n test -t android-23 --abi armeabi-v7a
-# - emulator -avd test -no-skin -no-audio -no-window &
-# - android-wait-for-emulator
-# - adb shell input keyevent 82 &
-
-#connecteddebugandroidtest
 script:
-    - ./gradlew clean testDebug :app:all-libraries:assembleAndroidTest :app:all-libraries:jacocoDebugReport :app:all-libraries:coveralls --stacktrace
+    - ./gradlew clean jacocoDebugReport coveralls --stacktrace
 
 notifications:
   email: false
