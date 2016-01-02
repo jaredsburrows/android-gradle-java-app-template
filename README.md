@@ -69,7 +69,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 
 ## Comand Line(Advanced):
 ##### Clone with `Git`:
- - `git clone https://github.com/jaredsburrows/AndroidGradleTemplate.git`
+ - `git clone https://github.com/jaredsburrows/android-gradle-java-template.git`
  - `cd AndroidGradleTemplate`
 
 ##### Installing/Running with `Gradle`:
@@ -94,12 +94,12 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Run a single unit test in the `debug flavor`:**
    - `gradlew testDebug --tests="*MainActivityTest*"`
  - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
-   - `gradlew testDebug --tests="*MainActivityTest*" jacocoTestReport`
+   - `gradlew testDebug --tests="*MainActivityTest*" jacocoDebugReport`
 
 License
 =========
 
-    Copyright (C) 2015 AndroidGradleTemplate by Jared Burrows
+    Copyright (C) 2015 android-gradle-java-template by Jared Burrows
    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
