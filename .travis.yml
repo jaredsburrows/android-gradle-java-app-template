@@ -3,6 +3,10 @@ language: android
 jdk:
  - oraclejdk7
  - oraclejdk8
+ 
+matrix:
+  allow_failures:
+    - jdk: oraclejdk7
 
 android:
   components:
