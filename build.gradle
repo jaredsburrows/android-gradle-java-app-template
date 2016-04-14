@@ -24,6 +24,15 @@ buildscript {
     }
 }
 
+allprojects {
+    // Gradle 2.8 + Java 7 issue, google error prone version 2.0.6+ is Java 8 only
+    // https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
+    //noinspection GroovyAssignabilityCheck
+    configurations.all {
+        resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.5'
+    }
+}
+
 configure(project('app')) {
     apply plugin: 'com.android.application'
     apply plugin: 'android-command'
