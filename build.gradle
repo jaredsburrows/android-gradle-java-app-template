@@ -76,7 +76,7 @@ android {
 // Publishing to google play
 play {
     serviceAccountEmail = 'jaredsburrows@gmail.com'
-    pk12File = file('key.p12')
+    pk12File = rootProject.file('./.buildscript/key.p12')
     track = 'production' // or 'beta' or 'alpha'
 }
 

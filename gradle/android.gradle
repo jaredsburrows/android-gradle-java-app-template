@@ -37,4 +37,14 @@ android {
                 'ResourceType',                 // Annotation binding
                 'GradleDependency'
     }
+
+    testOptions {
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
+        }
+    }
 }
