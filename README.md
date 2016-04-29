@@ -1,4 +1,4 @@
-android-gradle-java-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-java-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-java-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-java-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-java-template?branch=master)
+android-gradle-java-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-java-app-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-java-app-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
@@ -69,7 +69,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 
 ## Comand Line(Advanced):
 ##### Clone with `Git`:
- - `git clone https://github.com/jaredsburrows/android-gradle-java-template.git`
+ - `git clone https://github.com/jaredsburrows/android-gradle-java-app-template.git`
  - `cd AndroidGradleTemplate`
 
 ##### Installing/Running with `Gradle`:
@@ -99,7 +99,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 License
 =========
 
-    Copyright (C) 2015 android-gradle-java-template by Jared Burrows
+    Copyright (C) 2015 android-gradle-java-app-template by Jared Burrows
    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
