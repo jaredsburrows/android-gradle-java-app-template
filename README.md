@@ -1,4 +1,4 @@
-android-gradle-java-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-java-app-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-java-app-template?branch=master)
+android-gradle-java-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template) [![Coverage Status](https://coveralls.io/repos/github/jaredsburrows/android-gradle-java-app-template/badge.svg?branch=master)](https://coveralls.io/github/jaredsburrows/android-gradle-java-app-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
