@@ -19,13 +19,6 @@ import static org.hamcrest.Matchers.nullValue;
 public class AdUtilsTest {
 
     @Test
-    public void test_constructor() {
-        // since there is only 1 static method in the class
-        AdUtils adUtils = new AdUtils();
-        assertThat(adUtils, not(nullValue()));
-    }
-
-    @Test
     public void test_getErrorReason() {
         assertThat(getErrorReason(-1), is("Internal Error"));
         assertThat(getErrorReason(ERROR_CODE_INTERNAL_ERROR), is("Internal Error"));

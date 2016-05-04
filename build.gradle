@@ -122,11 +122,11 @@ dependencies {
     testCompile 'org.easymock:easymock:3.4'
 
     // PowerMock
-    testCompile 'org.powermock:powermock-core:1.6.4'
-    testCompile 'org.powermock:powermock-module-junit4:1.6.4'
+    testCompile 'org.powermock:powermock-core:1.6.5'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.5'
 
     // PowerMock + EasyMock extension
-    testCompile 'org.powermock:powermock-api-easymock:1.6.4'
+    testCompile 'org.powermock:powermock-api-easymock:1.6.5'
 
     // Robolectric + Support v4
     testCompile 'org.robolectric:shadows-play-services:3.0'

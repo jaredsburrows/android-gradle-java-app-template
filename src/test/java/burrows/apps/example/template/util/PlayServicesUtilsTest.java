@@ -50,10 +50,6 @@ public class PlayServicesUtilsTest {
         mockDialog = createMock(Dialog.class);
         mockCancelListener = createMock(DialogInterface.OnCancelListener.class);
         mockStatic(GooglePlayServicesUtil.class);
-
-        // since there is only 1 static method in the class
-        PlayServicesUtils playServicesUtils = new PlayServicesUtils();
-        assertThat(playServicesUtils, not(nullValue()));
     }
 
     @Test
