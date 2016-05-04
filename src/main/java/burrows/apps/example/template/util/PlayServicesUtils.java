@@ -11,7 +11,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  * @since 0.0.1
  */
-public class PlayServicesUtils {
+public final class PlayServicesUtils {
+
+    private PlayServicesUtils() {}
 
     public static boolean checkGooglePlayServices(final Activity activity) {
 
