@@ -28,14 +28,14 @@ public class PlaceholderFragment extends Fragment {
     /** Button to launch Interstitial Ad. */
     private Button buttonStartInterstitial;
     /** ClickListener for Button. */
-    private OnClickListener onClickListener = new OnClickListener() {
+    private final OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(final View v) {
             showInterstitialAd();
         }
     };
     /** Adview listener. */
-    private AdListener adListener = new AdListener() {
+    private final AdListener adListener = new AdListener() {
         @Override
         public void onAdClosed() {
             super.onAdClosed();
