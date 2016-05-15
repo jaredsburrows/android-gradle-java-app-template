@@ -8,15 +8,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+import burrows.apps.example.template.R;
+import burrows.apps.example.template.util.AdUtils;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-
-import burrows.apps.example.template.R;
-import burrows.apps.example.template.util.AdUtils;
-import burrows.apps.example.template.util.PlayServicesUtils;
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
@@ -93,8 +90,11 @@ public class PlaceholderFragment extends Fragment {
         super.onResume();
 
         /* Check for Google Play Services */
+        try {
+            // PlayServicesUtils.hasGooglePlayServices(this.getActivity(), GoogleApiAvailability.getInstance());
+        } catch (final Error e) {
 
-        PlayServicesUtils.checkGooglePlayServices(this.getActivity());
+        }
 
         if (this.adView != null) {
             this.adView.resume();

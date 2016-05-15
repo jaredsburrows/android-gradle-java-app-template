@@ -1,279 +1,311 @@
-package burrows.apps.lib.adapter;
+package burrows.apps.example.template.adapter;
 
+import android.annotation.TargetApi;
+import android.os.Build.VERSION_CODES;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import test.RoboTestBase;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
-public class BaseAdapterTest {
+/**
+ * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
+ */
+public class BaseAdapterTest extends RoboTestBase {
 
-    BaseAdapter<String, TestAdapter.TestViewHolder> adapter = new TestAdapter(); // use String, has equals/compareTo
-    String string = "string2"; // unique - string2 < string1, will set sorting later
-    String string2 = "string1"; // unique - string1 > string2
-    String string3 = "string3"; // unique
-    Comparator<String> comparator = new Comparator<String>() {
-        @Override
-        public int compare(final String lhs, final String rhs) {
-            return lhs.compareTo(rhs);
-        }
-    };
+    private BaseAdapter<String, TestAdapter.TestViewHolder> sut;
 
     @Before
-    public void setUp() {
-        assertThat(adapter, not(nullValue()));
-        assertThat(adapter.getItemCount(), is(0));
+    public void setUp() throws Exception {
+        sut = new TestAdapter(); // use String, has equals/compareTo
 
-        assertThat(adapter.add(string), is(true));
-        assertThat(adapter.add(string2), is(true));
-
-        assertThat(adapter.getItemCount(), is(2));
+        // data
+        sut.add(STRING_UNIQUE);
+        sut.add(STRING_UNIQUE2);
     }
 
     @After
-    public void tearDown() {
-        adapter.removeSelections();
-        adapter.clear();
+    public void tearDown() throws Exception {
+        sut.removeSelections();
+        sut.clear();
+    }
 
-        // reset
-        setUp();
+    // --------------------------------------------
+    // getItemCount()
+    // --------------------------------------------
+
+    @Test
+    public void testGetItemCountShouldReturnCorrectValues() {
+        assertThat(sut.getItemCount()).isEqualTo(2);
+    }
+
+    // --------------------------------------------
+    // getList()
+    // --------------------------------------------
+
+    @Test
+    public void testGetListCountShouldReturnCorrectValues() {
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE, STRING_UNIQUE2));
+    }
+
+    // --------------------------------------------
+    // getItem(final int location)
+    // --------------------------------------------
+
+    @Test
+    public void testGetItemShouldReturnCorrectValues() {
+        assertThat(sut.getItem(1)).isEqualTo(STRING_UNIQUE2);
+    }
+
+    // --------------------------------------------
+    // getLocation(final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testGetLocationShouldReturnCorrectValues() {
+        assertThat(sut.getLocation(STRING_UNIQUE2)).isEqualTo(1);
+    }
+
+    // --------------------------------------------
+    // clear()
+    // --------------------------------------------
+
+    @Test
+    public void testClearShouldClearAdapter() {
+        sut.clear();
+
+        assertThat(sut.getItemCount()).isEqualTo(0);
+    }
+
+    // --------------------------------------------
+    // add(final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testAddObjectShouldReturnCorrectValues() {
+        sut.add(STRING_UNIQUE3);
+
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE, STRING_UNIQUE2, STRING_UNIQUE3));
+    }
+
+    // --------------------------------------------
+    // add(final List<T> collection)
+    // --------------------------------------------
+
+    @Test
+    public void testAddCollectionShouldReturnCorrectValues() {
+        final List<String> list = Collections.singletonList(STRING_UNIQUE3);
+
+        sut.addAll(list);
+
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE, STRING_UNIQUE2, STRING_UNIQUE3));
+    }
+
+    // --------------------------------------------
+    // add(final int location, final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testAddLocationObjectShouldReturnCorrectValues() {
+        sut.add(0, STRING_UNIQUE3);
+
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE3, STRING_UNIQUE, STRING_UNIQUE2));
+    }
+
+    // --------------------------------------------
+    // set(final int location, final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testSetLocationObjectShouldReturnCorrectValues() {
+        sut.set(1, STRING_UNIQUE3);
+
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE, STRING_UNIQUE3));
+    }
+
+    // --------------------------------------------
+    // remove(final int location, final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testRemoveLocationObjectShouldReturnCorrectValues() {
+        sut.remove(0, STRING_UNIQUE);
+
+        assertThat(sut.getList()).isEqualTo(Collections.singletonList(STRING_UNIQUE2));
+    }
+
+    // --------------------------------------------
+    // remove(final T object)
+    // --------------------------------------------
+
+    @Test
+    public void testRemoveObjectShouldReturnCorrectValues() {
+        sut.remove(STRING_UNIQUE);
+
+        assertThat(sut.getList()).isEqualTo(Collections.singletonList(STRING_UNIQUE2));
+    }
+
+    // --------------------------------------------
+    // remove(final int location)
+    // --------------------------------------------
+
+    @Test
+    public void testRemoveLocationShouldReturnCorrectValues() {
+        sut.remove(0);
+
+        assertThat(sut.getList()).isEqualTo(Collections.singletonList(STRING_UNIQUE2));
+    }
+
+    // --------------------------------------------
+    // sort(final Comparator<? super T> comparator)
+    // --------------------------------------------
+
+    @Test
+    public void testSortShouldReturnCorrectValues() {
+        sut.sort(new Comparator<String>() {
+            @TargetApi(VERSION_CODES.KITKAT)
+            @Override
+            public int compare(final String lhs, final String rhs) {
+                return rhs.length() - lhs.length();
+            }
+        });
+
+        assertThat(sut.getList()).isEqualTo(Arrays.asList(STRING_UNIQUE2, STRING_UNIQUE));
+    }
+
+    // --------------------------------------------
+    // getItemSelectedCount()
+    // --------------------------------------------
+
+    @Test
+    public void testGetItemSelectedCountShouldReturnCorrectValues() {
+        sut.selectItem(0, true);
+        sut.selectItem(1, true);
+
+        assertThat(sut.getItemSelectedCount()).isEqualTo(2);
+    }
+
+    // --------------------------------------------
+    // getSelectedItems()
+    // --------------------------------------------
+
+    @Test
+    public void testGetSelectedItemsShouldReturnCorrectValues() {
+        sut.selectItem(0, true);
+        sut.selectItem(1, true);
+
+        // does not have equals implemented
+        assertThat(sut.getSelectedItems().get(0)).isEqualTo(true);
+        assertThat(sut.getSelectedItems().get(1)).isEqualTo(true);
+    }
+
+    // --------------------------------------------
+    // getSelectedList()
+    // --------------------------------------------
+
+    @Test
+    public void testGetSelectedListShouldReturnCorrectValues() {
+        sut.selectItem(0, true);
+        sut.selectItem(1, true);
+
+        assertThat(sut.getSelectedList()).contains(STRING_UNIQUE).contains(STRING_UNIQUE2);
+    }
+
+    // --------------------------------------------
+    // removeSelections()
+    // --------------------------------------------
+
+    @Test
+    public void testRemoveSelectionsSelectedCountShouldRemoveCorrectValues() {
+        sut.removeSelections();
+
+        assertThat(sut.getItemSelectedCount()).isEqualTo(0);
     }
 
     @Test
-    public void test_getItemCount() {
-        assertThat(adapter.getItemCount(), is(2));
+    public void testRemoveSelectionsSelectedListShouldRemoveCorrectValues() {
+        sut.removeSelections();
+
+        assertThat(sut.getSelectedList()).isEqualTo(Collections.EMPTY_LIST);
+    }
+
+    // --------------------------------------------
+    // toggleSelection(final int location)
+    // --------------------------------------------
+
+    @Test
+    public void testToggleSelectionSelectedCountOnShouldReturnCorrectValues() {
+        sut.toggleSelection(0);
+
+        assertThat(sut.getItemSelectedCount()).isEqualTo(1);
     }
 
     @Test
-    public void test_getList() {
-        assertThat(adapter.getList(), not(nullValue()));
-        assertThat(adapter.getList(), instanceOf(List.class));
+    public void testToggleSelectionSelectedListOnShouldReturnCorrectValues() {
+        sut.toggleSelection(0);
+
+        assertThat(sut.getSelectedList()).isEqualTo(Collections.singletonList(STRING_UNIQUE));
     }
 
     @Test
-    public void test_getItem() {
-        assertThat(adapter.getItem(0), is(string));
-        assertThat(adapter.getItem(1), is(string2));
+    public void testToggleSelectionSelectedCountOffShouldReturnCorrectValues() {
+        sut.toggleSelection(0);
+        sut.toggleSelection(0);
+
+        assertThat(sut.getItemSelectedCount()).isEqualTo(0);
     }
 
     @Test
-    public void test_getlocation() {
-        assertThat(adapter.getlocation(string), is(0));
-        assertThat(adapter.getlocation(string2), is(1));
+    public void testToggleSelectionSelectedListOffShouldReturnCorrectValues() {
+        sut.toggleSelection(0);
+        sut.toggleSelection(0);
+
+        assertThat(sut.getSelectedList()).isEqualTo(Collections.EMPTY_LIST);
+    }
+
+    // --------------------------------------------
+    // selectItem(final int location, final boolean Values)
+    // --------------------------------------------
+
+    @Test
+    public void testSelectItemSelectedCountOnShouldReturnCorrectValues() {
+        sut.selectItem(0, true);
+
+        assertThat(sut.getItemSelectedCount()).isEqualTo(1);
     }
 
     @Test
-    public void test_clear() {
-        assertThat(adapter.add(string), is(true));
-        assertThat(adapter.add(string2), is(true));
+    public void testSelectItemSelectedListOnShouldReturnCorrectValues() {
+        sut.selectItem(0, true);
 
-        adapter.clear();
-
-        assertThat(adapter.getItemCount(), is(0));
+        assertThat(sut.getSelectedList()).isEqualTo(Collections.singletonList(STRING_UNIQUE));
     }
 
     @Test
-    public void test_add_object() {
-        assertThat(adapter.getItemCount(), is(2));
+    public void testSelectItemSelectedCountOffShouldReturnCorrectValues() {
+        sut.selectItem(0, false);
 
-        assertThat(adapter.add(string), is(true));
-        assertThat(adapter.add(string2), is(true));
-
-        assertThat(adapter.getItemCount(), is(4));
+        assertThat(sut.getItemSelectedCount()).isEqualTo(0);
     }
 
     @Test
-    public void test_add_collection() {
-        List<String> list = new ArrayList<>();
-        list.add(string3);
-        assertThat(adapter.getItemCount(), is(2));
+    public void testSelectItemSelectedListOffShouldReturnCorrectValues() {
+        sut.selectItem(0, false);
 
-        assertThat(adapter.add(list), is(true));
-
-        assertThat(adapter.getItemCount(), is(3));
-    }
-
-    @Test
-    public void test_add_location_object() {
-        assertThat(adapter.getItemCount(), is(2));
-
-        adapter.add(0, string3);
-
-        assertThat(adapter.getItemCount(), is(3)); // append
-        assertThat(adapter.getItem(0), is(string3));
-        assertThat(adapter.getItem(1), is(string));
-        assertThat(adapter.getItem(2), is(string2));
-    }
-
-    @Test
-    public void test_set() {
-        assertThat(adapter.getItemCount(), is(2));
-
-        adapter.set(1, string3);
-
-        assertThat(adapter.getItemCount(), is(2)); // replace
-        assertThat(adapter.getItem(0), is(string));
-        assertThat(adapter.getItem(1), is(string3));
-    }
-
-    @Test
-    public void test_remove_location_object() {
-        assertThat(adapter.getItemCount(), is(2));
-
-        assertThat(adapter.remove(0, string), is(true));
-
-        assertThat(adapter.getItemCount(), is(1));
-        assertThat(adapter.getItem(0), is(string2));
-    }
-
-    @Test
-    public void test_remove_object() {
-        assertThat(adapter.getItemCount(), is(2));
-
-        assertThat(adapter.add(string3), is(true));
-        assertThat(adapter.getItemCount(), is(3));
-
-        assertThat(adapter.remove(string3), is(true));
-        assertThat(adapter.getItemCount(), is(2));
-    }
-
-    @Test
-    public void test_remove_location() {
-        assertThat(adapter.getItemCount(), is(2));
-
-        assertThat(adapter.add(string3), is(true));
-        assertThat(adapter.getItemCount(), is(3));
-
-        assertThat(adapter.remove(1), is(string2));
-        assertThat(adapter.getItemCount(), is(2));
-        assertThat(adapter.getItem(0), is(string));
-        assertThat(adapter.getItem(1), is(string3));
-    }
-
-    @Test
-    public void test_sort() {
-        assertThat(adapter.getItem(0), is(string));
-        assertThat(adapter.getItem(1), is(string2));
-
-        adapter.sort(comparator);
-
-        assertThat(adapter.getItem(0), is(string2));
-        assertThat(adapter.getItem(1), is(string));
-    }
-
-    @Test
-    public void test_getItemSelectedCount() {
-        List<String> selected = new ArrayList<>();
-        selected.add(string);
-        selected.add(string2);
-
-        adapter.selectItem(0, true);
-        adapter.selectItem(1, true);
-
-        assertThat(adapter.getItemSelectedCount(), is(2));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_getSelectedItems() {
-        List<String> selected = new ArrayList<>();
-        selected.add(string);
-        selected.add(string2);
-
-        adapter.selectItem(0, true);
-        adapter.selectItem(1, true);
-
-        assertThat(adapter.getItemSelectedCount(), is(2));
-        assertThat(adapter.getSelectedList(), is(selected));
-        assertThat(adapter.getSelectedItems(), not(nullValue())); // SparseBooleanArray does not have equals
-        assertThat(adapter.getSelectedItems().get(0), is(true));
-        assertThat(adapter.getSelectedItems().get(1), is(true));
-    }
-
-    @Test
-    public void test_getSelectedList() {
-        List<String> selected = new ArrayList<>();
-        selected.add(string);
-        selected.add(string2);
-
-        adapter.selectItem(0, true);
-        adapter.selectItem(1, true);
-
-        assertThat(adapter.getItemSelectedCount(), is(2));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_removeSelections() {
-        List<String> selected = new ArrayList<>();
-
-        adapter.removeSelections();
-
-        assertThat(adapter.getItemSelectedCount(), is(0));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_toggleSelection_on() {
-        List<String> selected = new ArrayList<>();
-        selected.add(string);
-
-        adapter.toggleSelection(0);
-
-        assertThat(adapter.getItemSelectedCount(), is(1));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_toggleSelection_off() {
-        List<String> selected = new ArrayList<>();
-
-        adapter.toggleSelection(0);
-        adapter.toggleSelection(0);
-
-        assertThat(adapter.getItemSelectedCount(), is(0));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_selectItem_on() {
-        List<String> selected = new ArrayList<>();
-        selected.add(string);
-
-        adapter.selectItem(0, true);
-
-        assertThat(adapter.getItemSelectedCount(), is(1));
-        assertThat(adapter.getSelectedList(), is(selected));
-    }
-
-    @Test
-    public void test_selectItem_off() {
-        List<String> selected = new ArrayList<>();
-
-        adapter.selectItem(0, false);
-
-        assertThat(adapter.getItemSelectedCount(), is(0));
-        assertThat(adapter.getSelectedList(), is(selected));
+        assertThat(sut.getSelectedList()).isEqualTo(Collections.EMPTY_LIST);
     }
 
     // stub
     public class TestAdapter extends BaseAdapter<String, TestAdapter.TestViewHolder> {
-
         @Override
         public TestViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
             return null;
@@ -281,11 +313,10 @@ public class BaseAdapterTest {
 
         @Override
         public void onBindViewHolder(final TestViewHolder testViewHolder, final int i) {
-
+            // nothing
         }
 
         public class TestViewHolder extends RecyclerView.ViewHolder {
-
             public TestViewHolder(final View itemView) {
                 super(itemView);
             }

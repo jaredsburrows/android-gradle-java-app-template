@@ -1,13 +1,9 @@
 package burrows.apps.example.template.activity;
 
 import android.os.Bundle;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
-
-import burrows.apps.example.template.test.TestBase;
+import test.RoboTestBase;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNot.not;
@@ -16,13 +12,11 @@ import static org.robolectric.Robolectric.buildActivity;
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- * @since 0.0.1
  */
-@RunWith(RobolectricGradleTestRunner.class)
-public class MainActivityTest extends TestBase {
+public class MainActivityTest extends RoboTestBase {
 
     @Test
-    public void test_notNull() {
+    public void testNotNull() {
         MainActivity mainActivity = buildActivity(MainActivity.class)
                 .create()
                 .start()
@@ -35,7 +29,7 @@ public class MainActivityTest extends TestBase {
     }
 
     @Test
-    public void test_onCreate_notNull() {
+    public void testOnCreateNotNull() {
         Bundle savedInstanceState = new Bundle();
         MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class)
                 .create(savedInstanceState)
