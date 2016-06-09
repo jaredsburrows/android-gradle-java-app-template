@@ -4,6 +4,8 @@ buildscript {
     }
 
     dependencies {
+        // Gradle build receipt
+        classpath "com.gradle:build-receipt-plugin:1.2"
         // Android gradle plugin
         classpath "com.android.tools.build:gradle:2.1.0"
         // Android command plugin
@@ -34,6 +36,7 @@ configurations.all {
     }
 }
 
+apply from: rootProject.file("gradle/receipt.gradle")
 apply plugin: "com.android.application"
 apply plugin: "android-command"
 apply plugin: "net.ltgt.errorprone"
