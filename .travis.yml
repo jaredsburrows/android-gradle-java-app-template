@@ -22,7 +22,7 @@ android:
     - '.+'
 
 script:
-    - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace --info
+  - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace
 
 notifications:
   email: false

@@ -1,0 +1,34 @@
+environment:
+#  ANDROID_HOME: "C:\\Program Files (x86)\\Android\\android-sdk"
+#  ANDROID_HOME: C:\android-sdk
+  ANDROID_HOME: C:\android-sdk-windows
+  JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+
+init:
+  - cd \
+  - appveyor DownloadFile http://dl.google.com/android/android-sdk_r24.4.1-windows.zip
+  - 7z x android-sdk_r24.4.1-windows.zip > nul
+
+install:
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools,tools
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-23.0.3,android-23
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository,extra-android-support
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository,extra-google-google_play_services
+
+build_script:
+# - del /F /Q "%USERPROFILE%\.gradle\caches\modules-2\modules-2.lock" 2>NUL
+#  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools,platform-tools
+#  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-23.0.3,android-23
+#  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository,extra-android-support
+#  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository,extra-google-google_play_services
+#  - mklink /j %ANDROID_HOME% "C:\Program Files (x86)\Android\android-sdk"
+#  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools,platform-tools,build-tools-23.0.3,android-23,extra-android-m2repository,extra-android-support,extra-google-m2repository,extra-google-google_play_services
+  - gradlew.bat clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt -s
+
+artifacts:
+  - path: build\reports\
+
+cache:
+  - "%USERPROFILE%\\.gradle"
+  - "%USERPROFILE%\\.gradle\\caches\\"
+  - "%USERPROFILE%\\.gradle\\wrapper\\"
