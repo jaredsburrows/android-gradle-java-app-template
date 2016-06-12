@@ -44,7 +44,8 @@ android {
                 "InvalidPackage",               // Butterknife, Okio and Realm
                 "ResourceType",                 // Annotation binding
                 "GradleDependency",
-                "NewerVersionAvailable"
+                "NewerVersionAvailable",
+                "PropertyEscape"                // CI issue with sdk.dir in local.properties
     }
 
     testOptions {

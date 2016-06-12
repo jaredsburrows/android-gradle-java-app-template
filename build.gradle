@@ -15,7 +15,7 @@ buildscript {
         // Publish to google play store
         classpath "com.github.triplet.gradle:play-publisher:1.1.4"
         // Dex method count
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.2"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.3"
         // Check for plugin updates
         classpath "com.github.ben-manes:gradle-versions-plugin:0.12.0"
         // Apk size
@@ -27,13 +27,6 @@ buildscript {
 
 repositories {
     maven { url "https://plugins.gradle.org/m2/" } // Mirrors jcenter() and mavenCentral()
-}
-
-// https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
-configurations.all {
-    resolutionStrategy {
-        force "com.google.errorprone:error_prone_core:2.0.5"
-    }
 }
 
 apply from: rootProject.file("gradle/receipt.gradle")
@@ -90,6 +83,13 @@ coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/jacocoDebugReport/jacocoDebugReport.xml"
 }
 
+// https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
+configurations.all {
+    resolutionStrategy {
+        force "com.google.errorprone:error_prone_core:2.0.5"
+    }
+}
+
 dependencies {
     // Android Support Library for AppCompat
     compile "com.android.support:appcompat-v7:23.4.0"
@@ -134,8 +134,9 @@ dependencies {
     testCompile "org.powermock:powermock-api-easymock:1.6.5"
 
     // Robolectric + Support v4
-    testCompile "org.robolectric:shadows-play-services:3.1-rc1"
-    testCompile "org.robolectric:shadows-support-v4:3.1-rc1"
+    testCompile "org.robolectric:shadows-play-services:3.1"
+    testCompile "org.robolectric:shadows-support-v4:3.1"
+    testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
 
     // AssertJ
     testCompile("com.squareup.assertj:assertj-android:1.1.1") { // 2/3.1.0 for java 8

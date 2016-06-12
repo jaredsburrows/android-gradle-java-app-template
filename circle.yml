@@ -4,6 +4,7 @@ machine:
 
 test:
   override:
+  # Circle CI fails/timeouts on unit tests
     - ./gradlew clean assembleDebug -Dreceipt --stacktrace
 #    - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace
 #  post:
@@ -13,10 +14,14 @@ test:
 dependencies:
   pre:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-    - echo y | android update sdk --all --no-ui --filter android-23,build-tools-23.0.3
-    - echo y | android update sdk --all --no-ui --filter tools,platform-tools
-    - echo y | android update sdk --all --no-ui --filter extra-android-support,extra-android-m2repository
-    - echo y | android update sdk --all --no-ui --filter extra-google-google_play_services,extra-google-m2repository
+    - echo y | android update sdk --no-ui --all --filter android-23
+    - echo y | android update sdk --no-ui --all --filter platform-tools
+    - echo y | android update sdk --no-ui --all --filter tools
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
+    - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
+    - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
+    - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
+    - echo y | android update sdk --no-ui --all --filter extra-android-support
   cache_directories:
     - $HOME/.m2
     - $HOME/.gradle

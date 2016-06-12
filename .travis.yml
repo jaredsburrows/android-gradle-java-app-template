@@ -1,25 +1,30 @@
 language: android
 
-jdk:
- - oraclejdk7
- - oraclejdk8
-
 matrix:
+  include:
+    - os: linux
+      jdk: oraclejdk8
+    - os: linux
+      jdk: oraclejdk7
+    - os: osx
+      env: ANDROID_HOME=/usr/local/opt/android-sdk
   allow_failures:
     - jdk: oraclejdk7
 
-android:
-  components:
-    - platform-tools
-    - tools
-    - build-tools-23.0.3
-    - android-23
-    - extra-android-support
-    - extra-google-google_play_services
-    - extra-android-m2repository
-    - extra-google-m2repository
-  licenses:
-    - '.+'
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = osx ]; then sh ./.buildscript/install-osx-jdk8.sh; fi
+  - if [ "$TRAVIS_OS_NAME" = osx ]; then brew update > /dev/null; fi
+  - if [ "$TRAVIS_OS_NAME" = osx ]; then brew install android-sdk; fi
+
+install:
+  - echo y | android update sdk --no-ui --all --filter tools
+  - echo y | android update sdk --no-ui --all --filter platform-tools
+  - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
+  - echo y | android update sdk --no-ui --all --filter android-23
+  - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
+  - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
+  - echo y | android update sdk --no-ui --all --filter extra-android-support
+  - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
 
 script:
   - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace
