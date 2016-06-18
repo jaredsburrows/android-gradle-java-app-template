@@ -6,9 +6,9 @@ matrix:
       jdk: oraclejdk8
     - os: osx
       env: ANDROID_HOME=/usr/local/opt/android-sdk
+      osx_image: xcode8
 
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = osx ]; then sh ./.buildscript/install-osx-jdk8.sh; fi
   - if [ "$TRAVIS_OS_NAME" = osx ]; then brew update > /dev/null; fi
   - if [ "$TRAVIS_OS_NAME" = osx ]; then brew install android-sdk; fi
 
