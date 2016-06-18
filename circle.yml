@@ -5,8 +5,8 @@ machine:
 test:
   override:
   # Circle CI fails/timeouts on unit tests
-    - ./gradlew clean assembleDebug -Dreceipt --stacktrace
-#    - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace
+    - ./gradlew clean assembleDebug -Dreceipt -s
+#    - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt -s
 #  post:
 #    - cp -r build/test-results/debug/*.xml $CIRCLE_TEST_REPORTS
 #    - cp -r build/reports/ $CIRCLE_ARTIFACTS
