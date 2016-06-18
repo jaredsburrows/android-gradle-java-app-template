@@ -13,14 +13,14 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = osx ]; then brew install android-sdk; fi
 
 install:
-  - echo y | android update sdk --no-ui --all --filter tools
-  - echo y | android update sdk --no-ui --all --filter platform-tools
-  - echo y | android update sdk --no-ui --all --filter build-tools-24.0.0
-  - echo y | android update sdk --no-ui --all --filter android-24
-  - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
-  - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
-  - echo y | android update sdk --no-ui --all --filter extra-android-support
-  - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
+  - echo y | android update sdk -u -a -t tools
+  - echo y | android update sdk -u -a -t platform-tools
+  - echo y | android update sdk -u -a -t build-tools-24.0.0
+  - echo y | android update sdk -u -a -t android-24
+  - echo y | android update sdk -u -a -t extra-google-m2repository
+  - echo y | android update sdk -u -a -t extra-google-google_play_services
+  - echo y | android update sdk -u -a -t extra-android-support
+  - echo y | android update sdk -u -a -t extra-android-m2repository
 
 script:
   - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt --stacktrace
