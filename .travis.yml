@@ -4,12 +4,8 @@ matrix:
   include:
     - os: linux
       jdk: oraclejdk8
-    - os: linux
-      jdk: oraclejdk7
     - os: osx
       env: ANDROID_HOME=/usr/local/opt/android-sdk
-  allow_failures:
-    - jdk: oraclejdk7
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = osx ]; then sh ./.buildscript/install-osx-jdk8.sh; fi
@@ -19,8 +15,8 @@ before_install:
 install:
   - echo y | android update sdk --no-ui --all --filter tools
   - echo y | android update sdk --no-ui --all --filter platform-tools
-  - echo y | android update sdk --no-ui --all --filter build-tools-23.0.3
-  - echo y | android update sdk --no-ui --all --filter android-23
+  - echo y | android update sdk --no-ui --all --filter build-tools-24.0.0
+  - echo y | android update sdk --no-ui --all --filter android-24
   - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
   - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
   - echo y | android update sdk --no-ui --all --filter extra-android-support
