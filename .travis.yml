@@ -23,7 +23,7 @@ install:
   - echo y | android update sdk -u -a -t extra-android-m2repository
 
 script:
-  - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt -s
+  - ./gradlew clean assembleDebug testDebug jacocoDebugReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
 
 notifications:
   email: false
@@ -31,11 +31,10 @@ notifications:
 sudo: false
 
 before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 cache:
   directories:
     - $HOME/.m2
     - $HOME/.gradle
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/

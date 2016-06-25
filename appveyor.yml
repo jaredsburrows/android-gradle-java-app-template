@@ -22,7 +22,7 @@ install:
 
 build_script:
 # - del /F /Q "%USERPROFILE%\.gradle\caches\modules-2\modules-2.lock" 2>NUL
-  - gradlew.bat clean assembleDebug testDebug jacocoDebugReport coveralls -Dreceipt -s
+  - gradlew.bat clean assembleDebug testDebug jacocoDebugReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
 
 artifacts:
   - path: "build\\reports\\"
@@ -30,5 +30,3 @@ artifacts:
 cache:
   - "%USERPROFILE%\\.m2"
   - "%USERPROFILE%\\.gradle"
-  - "%USERPROFILE%\\.gradle\\caches\\"
-  - "%USERPROFILE%\\.gradle\\wrapper\\"

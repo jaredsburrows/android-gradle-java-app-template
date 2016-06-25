@@ -1,8 +1,3 @@
-apply plugin: "pmd"
-apply plugin: "jacoco"
-apply plugin: "findbugs"
-apply plugin: "checkstyle"
-
 // Creates tasks based on the application build variant (productFlavor + buildType = variant)
 (android.hasProperty("applicationVariants")
         ? android."applicationVariants"
@@ -95,4 +90,9 @@ apply plugin: "checkstyle"
         source = files(android.sourceSets.main.java.srcDirs)
         classpath = files(configurations.compile.files)
     }
+}
+
+// Only allows specifying of a single file
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/jacoco/jacocoDebugReport/jacocoDebugReport.xml"
 }

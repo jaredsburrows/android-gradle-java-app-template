@@ -1,6 +1,0 @@
-apply plugin: "com.gradle.build-receipt"
-
-buildReceiptLicense {
-    agreementUrl = "https://gradle.com/terms-of-service"
-    agree = "yes"
-}
