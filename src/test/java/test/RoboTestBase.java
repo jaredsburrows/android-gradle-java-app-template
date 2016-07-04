@@ -34,9 +34,6 @@ public abstract class RoboTestBase extends TestBase {
 
         // Force success
 //        ShadowGooglePlayServicesUtil.setIsGooglePlayServicesAvailable(ConnectionResult.SUCCESS);
-
-        // Use the debug configuration
-//        ReflectionHelpers.setStaticField(BuildConfig.class, "DEBUG", false);
     }
 
     @After

@@ -35,7 +35,7 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 |Name|Description|
 |---|---|
 | [JUnit](https://github.com/junit-team/junit) | Java Unit Testing Framework |
-| [Hamcrest](https://github.com/hamcrest/JavaHamcrest) | Matchers for Unit Tests |
+| [AssertJ](http://joel-costigliola.github.io/assertj/) | Matchers for Unit Tests |
 | [Espresso](https://google.github.io/android-testing-support-library/) | Google's *New* Instrumentation Framework |
 | [Robolectric](https://github.com/robolectric/robolectric) | Unit Testing Framework |
 | [Mockito](https://github.com/mockito/mockito) | Mocking Framework |

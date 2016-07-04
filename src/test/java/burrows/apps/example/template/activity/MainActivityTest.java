@@ -1,13 +1,12 @@
 package burrows.apps.example.template.activity;
 
-import android.os.Bundle;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.robolectric.Robolectric;
+import org.robolectric.util.ActivityController;
 import test.RoboTestBase;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsNull.nullValue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
 /**
@@ -15,30 +14,27 @@ import static org.robolectric.Robolectric.buildActivity;
  */
 public class MainActivityTest extends RoboTestBase {
 
-    @Test
-    public void testNotNull() {
-        MainActivity mainActivity = buildActivity(MainActivity.class)
-                .create()
-                .start()
-                .resume()
-                .pause()
-                .destroy()
-                .visible()
-                .get();
-        assertThat(mainActivity, not(nullValue()));
+    private ActivityController<MainActivity> mController;
+    private MainActivity sut;
+
+    @Before
+    public void setUp() throws Exception {
+
+        // Create new activity
+        this.mController = buildActivity(MainActivity.class);
+        this.sut = this.mController.create().postCreate(null).start().resume().visible().get();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+        // Destroy activity
+        this.mController.pause().stop().destroy();
+        this.sut.finish();
     }
 
     @Test
     public void testOnCreateNotNull() {
-        Bundle savedInstanceState = new Bundle();
-        MainActivity mainActivity = Robolectric.buildActivity(MainActivity.class)
-                .create(savedInstanceState)
-                .start()
-                .resume()
-                .pause()
-                .destroy()
-                .visible()
-                .get();
-        assertThat(mainActivity, not(nullValue()));
+        assertThat(this.sut).isNotNull();
     }
 }
