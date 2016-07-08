@@ -16,9 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
             this.getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new PlaceholderFragment(), PlaceholderFragment.class.getSimpleName())
                     .commit();
         }
     }

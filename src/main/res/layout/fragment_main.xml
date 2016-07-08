@@ -7,7 +7,7 @@
                 tools:context=".MainActivity$PlaceholderFragment">
 
     <!-- Button to launch the -->
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/buttonStartInterstitial"
         android:text="@string/button_launch_interstitial"
         android:layout_width="wrap_content"
