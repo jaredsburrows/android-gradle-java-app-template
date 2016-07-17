@@ -17,16 +17,20 @@ public class MainActivityTest extends RoboTestBase {
     private ActivityController<MainActivity> mController;
     private MainActivity sut;
 
+    @Override
     @Before
     public void setUp() throws Exception {
+        super.setUp();
 
         // Create new activity
         this.mController = buildActivity(MainActivity.class);
         this.sut = this.mController.create().postCreate(null).start().resume().visible().get();
     }
 
+    @Override
     @After
     public void tearDown() throws Exception {
+        super.tearDown();
 
         // Destroy activity
         this.mController.pause().stop().destroy();

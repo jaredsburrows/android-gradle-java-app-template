@@ -8,11 +8,6 @@
 
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
-##### Works with the following Configurations:
- - Multiple Modules
- - Multiple Flavors
- - Android Libraries
-
 ## Technologies used:
 #### Build Tools:
 |Name|Description|

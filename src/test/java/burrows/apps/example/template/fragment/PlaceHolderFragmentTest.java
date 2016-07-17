@@ -23,10 +23,13 @@ import static org.robolectric.shadows.support.v4.SupportFragmentTestUtil.startVi
 @SuppressWarnings({"ConstantConditions", "ResourceType"})
 public class PlaceHolderFragmentTest extends RoboTestBase {
 
-    PlaceholderFragment fragment;
+    private PlaceholderFragment fragment;
 
+    @Override
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        super.setUp();
+
         fragment = new PlaceholderFragment();
         startFragment(fragment, FragmentActivity.class);
     }

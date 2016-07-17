@@ -24,8 +24,11 @@ public class BaseAdapterTest extends RoboTestBase {
 
     private BaseAdapter<String, TestAdapter.TestViewHolder> sut;
 
+    @Override
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
         sut = new TestAdapter(); // use String, has equals/compareTo
 
         // data
@@ -33,8 +36,11 @@ public class BaseAdapterTest extends RoboTestBase {
         sut.add(STRING_UNIQUE2);
     }
 
+    @Override
     @After
     public void tearDown() throws Exception {
+        super.tearDown();
+
         sut.removeSelections();
         sut.clear();
     }
@@ -305,7 +311,7 @@ public class BaseAdapterTest extends RoboTestBase {
     }
 
     // stub
-    public class TestAdapter extends BaseAdapter<String, TestAdapter.TestViewHolder> {
+    public static class TestAdapter extends BaseAdapter<String, TestAdapter.TestViewHolder> {
         @Override
         public TestViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
             return null;
@@ -316,7 +322,7 @@ public class BaseAdapterTest extends RoboTestBase {
             // nothing
         }
 
-        public class TestViewHolder extends RecyclerView.ViewHolder {
+        public static class TestViewHolder extends RecyclerView.ViewHolder {
             public TestViewHolder(final View itemView) {
                 super(itemView);
             }

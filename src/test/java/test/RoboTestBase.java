@@ -2,11 +2,14 @@ package test;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import burrows.apps.example.template.BuildConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import static org.robolectric.Robolectric.flushBackgroundThreadScheduler;
 import static org.robolectric.Robolectric.flushForegroundThreadScheduler;
@@ -18,24 +21,21 @@ import static org.robolectric.shadows.ShadowLooper.runUiThreadTasksIncludingDela
  *
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  */
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.M)
 public abstract class RoboTestBase extends TestBase {
 
     // Android Related
-    protected static final Context context = RuntimeEnvironment.application;
-    protected static final Application application = RuntimeEnvironment.application;
+    protected static final Context CONTEXT = RuntimeEnvironment.application;
+    protected static final Application APPLICATION = RuntimeEnvironment.application;
 
+    @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        // Turn off Google Analytics - Does not need to work anymore
-//        final ShadowApplication shadowApplication = Shadows.shadowOf(RuntimeEnvironment.application);
-//        shadowApplication.declareActionUnbindable("com.google.android.gms.analytics.service.START");
-
-        // Force success
-//        ShadowGooglePlayServicesUtil.setIsGooglePlayServicesAvailable(ConnectionResult.SUCCESS);
     }
 
+    @Override
     @After
     public void tearDown() throws Exception {
         super.tearDown();
