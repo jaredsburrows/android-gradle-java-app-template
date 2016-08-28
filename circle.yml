@@ -13,12 +13,11 @@ dependencies:
     - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
     - echo y | android update sdk -u -a -t tools
     - echo y | android update sdk -u -a -t platform-tools
-    - echo y | android update sdk -u -a -t build-tools-24.0.1
+    - echo y | android update sdk -u -a -t build-tools-24.0.2
     - echo y | android update sdk -u -a -t android-24
     - echo y | android update sdk -u -a -t extra-google-m2repository
-    - echo y | android update sdk -u -a -t extra-google-google_play_services
-    - echo y | android update sdk -u -a -t extra-android-support
     - echo y | android update sdk -u -a -t extra-android-m2repository
   cache_directories:
-    - $HOME/.m2
-    - $HOME/.gradle
+    - ~/.m2
+    - ~/.gradle
+
