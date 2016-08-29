@@ -26,18 +26,18 @@ import static org.powermock.api.easymock.PowerMock.verifyAll;
 import static org.powermock.api.support.SuppressCode.suppressConstructor;
 
 /**
+ * Powermock and Easymock test.
+ *
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(GoogleApiAvailability.class)
 public class PlayServicesUtilsTest {
-
     private Activity mockActivity;
     private Dialog mockDialog;
     private GoogleApiAvailability mockSingleton;
 
-    @Before
-    public void setUp() {
+    @Before public void setUp() {
         mockActivity = createMock(Activity.class);
         mockDialog = createMock(Dialog.class);
 
@@ -47,8 +47,7 @@ public class PlayServicesUtilsTest {
         expect(GoogleApiAvailability.getInstance()).andReturn(mockSingleton).anyTimes();
     }
 
-    @Test
-    public void testSuccess() {
+    @Test public void testSuccess() {
         expect(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).andReturn(SUCCESS);
 
         replay(GoogleApiAvailability.class);
@@ -59,28 +58,23 @@ public class PlayServicesUtilsTest {
         verifyAll();
     }
 
-    @Test
-    public void testServiceDisabled() {
+    @Test public void testServiceDisabled() {
         failTest(ConnectionResult.SERVICE_DISABLED);
     }
 
-    @Test
-    public void testServiceInvalid() {
+    @Test public void testServiceInvalid() {
         failTest(ConnectionResult.SERVICE_INVALID);
     }
 
-    @Test
-    public void testServiceMissing() {
+    @Test public void testServiceMissing() {
         failTest(ConnectionResult.SERVICE_MISSING);
     }
 
-    @Test
-    public void testServiceVersionUpdateRequired() {
+    @Test public void testServiceVersionUpdateRequired() {
         failTest(ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED);
     }
 
-    @Test
-    public void testFailSwitchCase() {
+    @Test public void testFailSwitchCase() {
         failTest(-1);
     }
 

@@ -11,12 +11,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
+ * Junit 4 test.
+ *
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  */
 public class AdUtilsTest {
-
-    @Test
-    public void testGetErrorReason() {
+    @Test public void testGetErrorReason() {
         assertThat(getErrorReason(-1), is("Internal Error"));
         assertThat(getErrorReason(ERROR_CODE_INTERNAL_ERROR), is("Internal Error"));
         assertThat(getErrorReason(ERROR_CODE_INVALID_REQUEST), is("Invalid Request"));

@@ -8,10 +8,8 @@ import burrows.apps.example.template.fragment.PlaceholderFragment;
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- * @since 0.0.1
  */
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

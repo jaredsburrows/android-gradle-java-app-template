@@ -14,9 +14,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  */
 public final class PlayServicesUtils {
-
     private PlayServicesUtils() {
-        // Utility class
     }
 
     /**

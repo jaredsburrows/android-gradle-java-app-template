@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
 /**
+ * Robolectric test.
+ *
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
  */
 public class MainActivityTest extends RoboTestBase {
-
     private ActivityController<MainActivity> mController;
     private MainActivity sut;
 

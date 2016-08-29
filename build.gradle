@@ -31,7 +31,6 @@ repositories repos
 
 apply plugin: "com.android.application"
 apply plugin: "android-command"
-apply plugin: "com.github.triplet.play"
 apply plugin: "com.getkeepsafe.dexcount"
 apply plugin: "com.vanniktech.android.apk.size"
 apply from: rootProject.file("gradle/buildScan.gradle")

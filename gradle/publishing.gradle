@@ -1,3 +1,5 @@
+apply plugin: "com.github.triplet.play"
+
 // Publishing to google play
 play {
     serviceAccountEmail = "jaredsburrows@gmail.com"

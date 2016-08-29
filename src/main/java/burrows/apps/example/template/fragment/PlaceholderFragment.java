@@ -17,24 +17,32 @@ import com.google.android.gms.ads.InterstitialAd;
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- * @since 0.0.1
  */
 public class PlaceholderFragment extends Fragment {
-
-    /** Static Adview. */
+    /**
+     * Static Adview.
+     */
     private AdView mAdView;
-    /** AdMob Full-Page Ad. */
+    /**
+     * AdMob Full-Page Ad.
+     */
     private InterstitialAd mInterstitialAd;
-    /** Button to launch Interstitial Ad. */
+    /**
+     * Button to launch Interstitial Ad.
+     */
     private AppCompatButton mButtonStartInterstitial;
-    /** ClickListener for Button. */
+    /**
+     * ClickListener for Button.
+     */
     private final OnClickListener mOnClickListener = new OnClickListener() {
         @Override
         public void onClick(final View v) {
             showInterstitialAd();
         }
     };
-    /** Adview listener. */
+    /**
+     * Adview listener.
+     */
     private final AdListener mAdListener = new AdListener() {
         @Override
         public void onAdClosed() {
@@ -119,7 +127,7 @@ public class PlaceholderFragment extends Fragment {
         if (this.mInterstitialAd.isLoaded()) {
             this.mInterstitialAd.show();
         } else {
-            /* Simply let the user know it has not been loaded and try again. */
+            // Simply let the user know it has not been loaded and try again.
             Toast.makeText(this.getActivity(), "Interstitial Ad has not loaded.", Toast.LENGTH_SHORT).show();
             this.mInterstitialAd.loadAd(new AdRequest.Builder().build());
         }
