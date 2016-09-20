@@ -7,10 +7,10 @@ buildscript {
 
     dependencies {
         classpath "com.gradle:build-scan-plugin:1.0"
-        classpath "com.android.tools.build:gradle:2.1.3"
+        classpath "com.android.tools.build:gradle:2.2.0"
         classpath "com.novoda:gradle-android-command-plugin:1.6.0"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.0"
-        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.2.0"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.1"
+        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
         classpath "com.github.triplet.gradle:play-publisher:1.1.4"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3"
         classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
@@ -63,7 +63,7 @@ android {
     }
 }
 
-def supportLibraryVersion = "24.2.0"
+def supportLibraryVersion = "24.2.1"
 def espressoVersion = "2.2.2"
 def playServicesVersion = "9.4.0"
 def powerMockVersion = "1.6.5"
