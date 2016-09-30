@@ -24,18 +24,12 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 |---|---|
 | [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | Support Library API 4+|
 | [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | Support Library API 7+|
-| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | Admob, Analytics, etc
 
 ####Testing Frameworks:
 |Name|Description|
 |---|---|
-| [JUnit](https://github.com/junit-team/junit) | Java Unit Testing Framework |
-| [AssertJ](http://joel-costigliola.github.io/assertj/) | Matchers for Unit Tests |
-| [Espresso](https://google.github.io/android-testing-support-library/) | Google's *New* Instrumentation Framework |
+| [Espresso](https://google.github.io/android-testing-support-library/) | Instrumentation Framework |
 | [Robolectric](https://github.com/robolectric/robolectric) | Unit Testing Framework |
-| [Mockito](https://github.com/mockito/mockito) | Mocking Framework |
-| [EasyMock](https://github.com/easymock/easymock) | Mocking Framework |
-| [PowerMock](https://github.com/jayway/powermock) | Mocking Framework(static method support) |
 
 ####Reporting Plugins:
 |Name|Description|
@@ -59,38 +53,71 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
  - **Import/Open this project with Android Studio/Intellij(click on `build.gradle`)**
 
  - **Instrumentation Tests:**
-  - Change the Build Variant Test Artifact to `Instrumentation Tests` 
+  - Change the Build Variant Test Artifact to `Instrumentation Tests`
   - Right click an instrumentation test located in `src/main/androidTest` and click test
 
  - **Unit Tests:**
   - Change the Build Variant Test Artifact to `Unit Tests`
   - Right click a unit test located in `src/main/test` and click test
 
-## Comand Line(Advanced):
-##### Clone with `Git`:
- - `git clone https://github.com/jaredsburrows/android-gradle-java-app-template.git`
- - `cd AndroidGradleTemplate`
+## Building and Running
 
-##### Installing/Running with `Gradle`:
- - **Install the `debug flavor` on your Android Device:**
-   - `gradlew installDebug`
- - **Install and Run the `debug flavor` on your Android Device:**
-   - `gradlew runDebug` 
 
-##### Running Instrumentation/Espresso Tests with `Gradle`:
- - **Run all instrumentation tests in all `flavors`:**
-   - `gradlew connectedAndroidTest`
- - **Run all instrumentation `debug flavor` tests:**
-   - `gradlew connectedDebugAndroidTest`
- 
-##### Running Unit Tests with `Gradle`:
- - **Run all unit tests in all `flavors`:**
-   - `gradlew test`
- - **Run a single unit test in all `flavors`:**
-   - `gradlew test --tests="*MainActivityTest*"`
- - **Run all unit `debug flavor` tests:**
-   - `gradlew testDebug`
- - **Run a single unit test in the `debug flavor`:**
-   - `gradlew testDebug --tests="*MainActivityTest*"`
- - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
-   - `gradlew testDebug --tests="*MainActivityTest*" jacocoDebugReport`
+This project builds with [Gradle](www.gradle.org) and the Android Build [tools](http://tools.android.com/tech-docs/new-build-system).
+
+
+**Build the APK:**
+
+    $ gradlew assembleDebug
+
+**Install the APK:**
+
+    $ gradlew installDebug
+
+**Run the App:**
+
+    $ gradlew runDebug
+
+## Testing
+
+
+**Running the Unit Tests:**
+
+
+The [Junit](http://junit.org/junit4/) and [Robolectric](https://github.com/robolectric/robolectric) tests run on the JVM, no need for emulators or real devices.
+
+
+    $ gradlew testDebug
+    
+**Run a single unit test in the `debug flavor`:**
+
+    $ gradlew testDebug --tests="*MainActivityTest*"
+
+    
+**Running the Instrumentation Tests:**
+
+
+The [Espresso](https://developer.android.com/training/testing/ui-testing/espresso-testing.html) instrumentation tests run on the device.
+
+    $ gradlew connectedDebugAndroidTest
+    
+
+## Reports
+
+
+**Generate Lint Reports:**
+
+
+The [Lint](http://developer.android.com/tools/help/lint.html) plugin generates reports based off the source code.
+
+
+    $ gradlew lintDebug
+
+
+**Generate Jacoco Test Coverage:**
+
+
+The [Jacoco](http://www.eclemma.org/jacoco/) plugin generates coverage reports based off the unit tests.
+
+
+    $ gradlew jacocoDebugReport
