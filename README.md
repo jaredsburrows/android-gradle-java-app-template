@@ -5,6 +5,7 @@
 [![CircleCI Linux Build](https://img.shields.io/circleci/project/jaredsburrows/android-gradle-java-app-template/master.svg?label=Linux%20Build)](https://circleci.com/gh/jaredsburrows/android-gradle-java-app-template)
 [![AppVeyor Windows Build](https://img.shields.io/appveyor/ci/jaredsburrows/android-gradle-java-app-template/master.svg?label=Windows%20Build)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-java-app-template/branch/master)
 [![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-java-app-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-java-app-template?branch=master)
+[![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
