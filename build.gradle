@@ -44,7 +44,7 @@ android {
         applicationId "burrows.apps.example.template"
         versionCode 1
         versionName "1.0"
-        minSdkVersion 11
+        minSdkVersion 16
         targetSdkVersion 25
         // Espresso test runner
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
