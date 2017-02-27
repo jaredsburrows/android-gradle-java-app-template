@@ -38,7 +38,7 @@ apply from: rootProject.file("gradle/publishing.gradle")
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "burrows.apps.example.template"
