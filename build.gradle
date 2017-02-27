@@ -1,27 +1,28 @@
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
-        classpath "com.gradle:build-scan-plugin:1.3"
+        classpath "com.gradle:build-scan-plugin:1.4"
         classpath "com.android.tools.build:gradle:2.2.2"
-        classpath "com.novoda:gradle-android-command-plugin:1.6.0"
+        classpath "com.novoda:gradle-android-command-plugin:1.7.1"
         classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.1"
         classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
         classpath "com.github.triplet.gradle:play-publisher:1.1.4"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3"
         classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.13.0"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.14.0"
     }
 }
 
 repositories {
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.4"
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 apply from: rootProject.file("gradle/buildScan.gradle")
@@ -78,28 +79,22 @@ android {
     }
 
     lintOptions {
-        textReport true
         textOutput "stdout"
         checkAllWarnings true
         warningsAsErrors true
-        showAll true
-        explainIssues true
-        disable "UnusedResources",              // Unused will be removed on release
-            "IconExpectedSize",             // Using the material icons provided from Google
-            "GoogleAppIndexingApiWarning",  // We might want to index our app later
-            "InvalidPackage",               // Butterknife, Okio and Realm
-            "ResourceType",                 // Annotation binding
-            "GradleDependency",
-            "NewerVersionAvailable",
-            "PropertyEscape"                // CI issue with sdk.dir in local.properties
+        disable "UnusedResources"              // Unused will be removed on release
+        disable "IconExpectedSize"             // Using the material icons provided from Google
+        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
+        disable "InvalidPackage"               // Butterknife, Okio and Realm
+        disable "ResourceType"                 // Annotation binding
+        disable "GradleDependency"
+        disable "NewerVersionAvailable"
     }
 
-    testOptions {
-        unitTests {
-            all {
-                jacoco {
-                    includeNoLocationClasses = true
-                }
+    testOptions.unitTests {
+        all {
+            jacoco {
+                includeNoLocationClasses = true
             }
         }
     }

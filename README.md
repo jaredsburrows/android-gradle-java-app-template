@@ -1,9 +1,7 @@
 # Android Gradle Java App Template 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![TravisCI OSX Build](https://img.shields.io/travis/jaredsburrows/android-gradle-java-app-template/master.svg?label=OSX%20Build)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template)
-[![CircleCI Linux Build](https://img.shields.io/circleci/project/jaredsburrows/android-gradle-java-app-template/master.svg?label=Linux%20Build)](https://circleci.com/gh/jaredsburrows/android-gradle-java-app-template)
-[![AppVeyor Windows Build](https://img.shields.io/appveyor/ci/jaredsburrows/android-gradle-java-app-template/master.svg?label=Windows%20Build)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-java-app-template/branch/master)
+[![TravisCI OSX Build](https://img.shields.io/travis/jaredsburrows/android-gradle-java-app-template/master.svg)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template)
 [![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-java-app-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-java-app-template?branch=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 

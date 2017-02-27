@@ -1,38 +1,24 @@
 language: android
 
-env:
-  global:
-    - MALLOC_ARENA_MAX=2
-    - ADB_INSTALL_TIMEOUT=8
+jdk:
+  - oraclejdk8
 
-matrix:
-  include:
-    - os: linux
-      jdk: oraclejdk8
-    - os: osx
-      env: ANDROID_HOME=/usr/local/opt/android-sdk
-      osx_image: xcode8
-
-before_install:
-  - if [ "$TRAVIS_OS_NAME" = osx ]; then brew update > /dev/null; fi
-  - if [ "$TRAVIS_OS_NAME" = osx ]; then brew install android-sdk; fi
-
-install:
-  - echo y | android update sdk -u -a -t tools
-  - echo y | android update sdk -u -a -t platform-tools
-  - echo y | android update sdk -u -a -t build-tools-25.0.0
-  - echo y | android update sdk -u -a -t android-25
-  - echo y | android update sdk -u -a -t extra-google-m2repository
-  - echo y | android update sdk -u -a -t extra-android-m2repository
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - android-25
+    - extra-android-m2repository
 
 script:
   - ./gradlew clean build jacocoDebugReport coveralls -Dscan --configure-on-demand --parallel --stacktrace
 
-sudo: required
+branches:
+  except:
+    - gh-pages
 
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+sudo: false
 
 cache:
   directories:
