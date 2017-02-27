@@ -7,10 +7,10 @@ buildscript {
         classpath "com.gradle:build-scan-plugin:1.4"
         classpath "com.android.tools.build:gradle:2.2.2"
         classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.1"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2"
         classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
         classpath "com.github.triplet.gradle:play-publisher:1.1.4"
-        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3"
+        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
         classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
         classpath "com.github.ben-manes:gradle-versions-plugin:0.14.0"
     }
@@ -100,9 +100,9 @@ android {
     }
 }
 
-def supportLibraryVersion = "25.0.0"
+def supportLibraryVersion = "25.2.0"
 def espressoVersion = "2.2.2"
-def playServicesVersion = "9.4.0"
+def playServicesVersion = "10.2.0"
 def powerMockVersion = "1.6.5"
 
 dependencies {
@@ -138,7 +138,7 @@ dependencies {
     testCompile "junit:junit:4.12"
 
     // Mockito
-    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "org.mockito:mockito-core:2.7.12"
 
     // EasyMock
     testCompile "org.easymock:easymock:3.4"
@@ -151,10 +151,10 @@ dependencies {
     testCompile "org.powermock:powermock-api-easymock:${powerMockVersion}"
 
     // Robolectric + Support v4
-    testCompile "org.robolectric:shadows-support-v4:3.1.2"
+    testCompile "org.robolectric:shadows-support-v4:3.2.2"
     testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
 
     // AssertJ
     testCompile "com.android.support:support-annotations:${supportLibraryVersion}"
-    testCompile "com.squareup.assertj:assertj-android:1.1.1"
+    testCompile "org.assertj:assertj-core:1.7.1"
 }
