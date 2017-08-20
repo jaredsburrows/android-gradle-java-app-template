@@ -4,24 +4,25 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.gradle:build-scan-plugin:1.4"
-        classpath "com.android.tools.build:gradle:2.2.2"
+        classpath "com.gradle:build-scan-plugin:1.8"
+        classpath "com.android.tools.build:gradle:2.3.3"
         classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3"
         classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
-        classpath "com.github.triplet.gradle:play-publisher:1.1.4"
+        classpath "com.github.triplet.gradle:play-publisher:1.2.0"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.14.0"
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
     }
 }
 
 repositories {
+    google()
     maven { url "https://plugins.gradle.org/m2/" }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "3.4"
+    gradleVersion = "4.1"
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -33,21 +34,23 @@ apply plugin: "com.vanniktech.android.apk.size"
 apply plugin: "net.ltgt.errorprone"
 apply plugin: "com.github.ben-manes.versions"
 apply from: rootProject.file("gradle/compile.gradle")
-apply from: rootProject.file("gradle/codeQuality.gradle")
+apply from: rootProject.file("gradle/quality.gradle")
 apply from: rootProject.file("gradle/publishing.gradle")
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "burrows.apps.example.template"
         versionCode 1
         versionName "1.0"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         // Espresso test runner
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "en"
+        vectorDrawables.useSupportLibrary = true
     }
 
     // Debug - testing and letting others use
@@ -100,10 +103,14 @@ android {
     }
 }
 
-def supportLibraryVersion = "25.2.0"
-def espressoVersion = "2.2.2"
-def playServicesVersion = "10.2.0"
-def powerMockVersion = "1.6.5"
+def supportLibraryVersion = "26.0.1"
+def espressoVersion = "3.0.0"
+def playServicesVersion = "11.2.0"
+def powerMockVersion = "1.7.1"
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
+}
 
 dependencies {
     // Android Support Library for AppCompat
@@ -122,23 +129,16 @@ dependencies {
 
     // Espresso Instrumentation Testing
     androidTestCompile "com.android.support:support-annotations:${supportLibraryVersion}"
+    androidTestCompile "com.android.support.test:runner:1.0.0"
     androidTestCompile "com.android.support.test.espresso:espresso-core:${espressoVersion}"
-    androidTestCompile "com.android.support.test:runner:0.5"
     androidTestCompile "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
-        exclude module: "appcompat"
-        exclude module: "support-v4"
-        exclude module: "support-v7"
-        exclude module: "design"
-        exclude module: "support-annotations"
-        exclude module: "recyclerview-v7"
-    }
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") { exclude group: "com.android.support" }
 
     // Junit
     testCompile "junit:junit:4.12"
 
     // Mockito
-    testCompile "org.mockito:mockito-core:2.7.12"
+    testCompile "org.mockito:mockito-inline:2.8.47"
 
     // EasyMock
     testCompile "org.easymock:easymock:3.4"
