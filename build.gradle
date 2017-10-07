@@ -1,29 +1,32 @@
 buildscript {
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
+  apply from: rootProject.file("gradle/dependencies.gradle")
 
-    dependencies {
-        classpath "com.gradle:build-scan-plugin:1.8"
-        classpath "com.android.tools.build:gradle:2.3.3"
-        classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3"
-        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
-        classpath "com.github.triplet.gradle:play-publisher:1.2.0"
-        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-    }
+  repositories {
+    google()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+
+  dependencies {
+    classpath "com.gradle:build-scan-plugin:1.8"
+    classpath "com.android.tools.build:gradle:2.3.3"
+    classpath "com.novoda:gradle-android-command-plugin:1.7.1"
+    classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1"
+    classpath "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
+    classpath "com.github.triplet.gradle:play-publisher:1.2.0"
+    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
+    classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+  }
 }
 
 repositories {
-    google()
-    maven { url "https://plugins.gradle.org/m2/" }
+  google()
+  maven { url "https://plugins.gradle.org/m2/" }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.1"
-    distributionType = Wrapper.DistributionType.ALL
+  gradleVersion = "4.1"
+  distributionType = Wrapper.DistributionType.ALL
 }
 
 apply from: rootProject.file("gradle/scan.gradle")
@@ -35,126 +38,102 @@ apply plugin: "net.ltgt.errorprone"
 apply plugin: "com.github.ben-manes.versions"
 apply from: rootProject.file("gradle/compile.gradle")
 apply from: rootProject.file("gradle/quality.gradle")
-apply from: rootProject.file("gradle/publishing.gradle")
+apply from: rootProject.file("gradle/publish.gradle")
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
 
-    defaultConfig {
-        applicationId "burrows.apps.example.template"
-        versionCode 1
-        versionName "1.0"
-        minSdkVersion 16
-        targetSdkVersion 26
-        // Espresso test runner
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resConfigs "en"
-        vectorDrawables.useSupportLibrary = true
-    }
+  defaultConfig {
+    applicationId "burrows.apps.example.template"
+    versionCode 1
+    versionName "1.0"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    resConfigs "en"
+    vectorDrawables.useSupportLibrary = true
+  }
 
-    // Debug - testing and letting others use
-    signingConfigs {
-        debug {
-            storeFile rootProject.file("./.buildscript/debug.keystore")
-            storePassword "android"
-            keyAlias "androiddebugkey"
-            keyPassword "android"
-        }
+  signingConfigs {
+    debug {
+      storeFile rootProject.file("./.buildscript/debug.keystore")
+      storePassword rootProject.ext.debugKeystorePass
+      keyAlias rootProject.ext.debugKeystoreUser
+      keyPassword rootProject.ext.debugKeystorePass
     }
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
-            proguardFile "proguard-rules.pro"
-            signingConfig signingConfigs.debug
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
+      proguardFile "proguard-rules.pro"
+      signingConfig signingConfigs.debug
     }
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
+  compileOptions {
+    sourceCompatibility rootProject.ext.javaVersion
+    targetCompatibility rootProject.ext.javaVersion
+  }
 
-    dexOptions {
-        preDexLibraries !Boolean.valueOf(System.getenv("TRAVIS"))
-    }
+  aaptOptions.cruncherEnabled = rootProject.ext.ci
 
-    lintOptions {
-        textOutput "stdout"
-        checkAllWarnings true
-        warningsAsErrors true
-        disable "UnusedResources"              // Unused will be removed on release
-        disable "IconExpectedSize"             // Using the material icons provided from Google
-        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
-        disable "InvalidPackage"               // Butterknife, Okio and Realm
-        disable "ResourceType"                 // Annotation binding
-        disable "GradleDependency"
-        disable "NewerVersionAvailable"
-    }
+  dexOptions.preDexLibraries !rootProject.ext.ci
 
-    testOptions.unitTests {
-        all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
+  lintOptions {
+    textOutput "stdout"
+    checkAllWarnings true
+    warningsAsErrors true
+    disable "UnusedResources" // Unused will be removed on release
+    disable "IconExpectedSize" // Using the material icons provided from Google
+    disable "GoogleAppIndexingApiWarning" // We might want to index our app later
+    disable "InvalidPackage" // Butterknife, Okio and Realm
+    disable "ResourceType" // Annotation binding
+    disable "GradleDependency"
+    disable "NewerVersionAvailable"
+  }
+
+  testOptions.unitTests {
+    all {
+      jacoco {
+        includeNoLocationClasses = true
+      }
     }
+  }
 }
 
-def supportLibraryVersion = "26.0.1"
-def espressoVersion = "3.0.0"
-def playServicesVersion = "11.2.0"
+def supportLibraryVersion = "26.1.0"
+def espressoVersion = "3.0.1"
+def playServicesVersion = "11.4.2"
 def powerMockVersion = "1.7.1"
 
 configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
+  resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
 }
 
 dependencies {
-    // Android Support Library for AppCompat
-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+  compile "com.android.support:design:$supportLibraryVersion"
+  compile "com.android.support:cardview-v7:$supportLibraryVersion"
+  compile "com.google.android.gms:play-services-ads:$playServicesVersion"
+  compile "com.google.android.gms:play-services-basement:$playServicesVersion"
+  compile "com.google.android.gms:play-services-base:$playServicesVersion"
 
-    // Android Support Library for the CardView
-    compile "com.android.support:cardview-v7:${supportLibraryVersion}"
+  androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
+  androidTestCompile "com.android.support.test:runner:1.0.1"
+  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+  androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+  androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion", { exclude group: "com.android.support" }
 
-    // Android Support Library for the RecyclerView
-    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
-
-    // Google Play Services - Ads
-    compile "com.google.android.gms:play-services-ads:${playServicesVersion}"
-    compile "com.google.android.gms:play-services-basement:${playServicesVersion}"
-    compile "com.google.android.gms:play-services-base:${playServicesVersion}"
-
-    // Espresso Instrumentation Testing
-    androidTestCompile "com.android.support:support-annotations:${supportLibraryVersion}"
-    androidTestCompile "com.android.support.test:runner:1.0.0"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:${espressoVersion}"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") { exclude group: "com.android.support" }
-
-    // Junit
-    testCompile "junit:junit:4.12"
-
-    // Mockito
-    testCompile "org.mockito:mockito-inline:2.8.47"
-
-    // EasyMock
-    testCompile "org.easymock:easymock:3.4"
-
-    // PowerMock
-    testCompile "org.powermock:powermock-core:${powerMockVersion}"
-    testCompile "org.powermock:powermock-module-junit4:${powerMockVersion}"
-
-    // PowerMock + EasyMock extension
-    testCompile "org.powermock:powermock-api-easymock:${powerMockVersion}"
-
-    // Robolectric + Support v4
-    testCompile "org.robolectric:shadows-support-v4:3.2.2"
-    testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
-
-    // AssertJ
-    testCompile "com.android.support:support-annotations:${supportLibraryVersion}"
-    testCompile "org.assertj:assertj-core:1.7.1"
+  testCompile "junit:junit:4.12"
+  testCompile "org.mockito:mockito-inline:2.10.0"
+  testCompile "org.easymock:easymock:3.5"
+  testCompile "org.powermock:powermock-core:$powerMockVersion"
+  testCompile "org.powermock:powermock-module-junit4:$powerMockVersion"
+  testCompile "org.powermock:powermock-api-easymock:$powerMockVersion"
+  testCompile "org.robolectric:shadows-support-v4:3.2"
+  testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+  testCompile "com.android.support:support-annotations:$supportLibraryVersion"
+  testCompile "org.assertj:assertj-core:1.7.1"
 }

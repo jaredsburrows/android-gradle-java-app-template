@@ -1,0 +1,12 @@
+// android plugin
+ext {
+  compileSdkVersion = 26
+  buildToolsVersion = "26.0.2"
+  minSdkVersion = 19
+  targetSdkVersion = 26
+  javaVersion = "1.7"
+  debugKeystoreUser = "androiddebugkey"
+  debugKeystorePass = "android"
+
+  ci = rootProject.hasProperty("ci")
+}
