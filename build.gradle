@@ -26,7 +26,7 @@ task wrapper(type: Wrapper) {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-apply from: rootProject.file("gradle/buildScan.gradle")
+apply from: rootProject.file("gradle/scan.gradle")
 apply plugin: "com.android.application"
 apply plugin: "android-command"
 apply plugin: "com.getkeepsafe.dexcount"
@@ -39,7 +39,7 @@ apply from: rootProject.file("gradle/publishing.gradle")
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "burrows.apps.example.template"

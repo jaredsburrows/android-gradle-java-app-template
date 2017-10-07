@@ -51,5 +51,7 @@ tasks.withType(Javadoc) {
 
 // Prevent forked processes from stealing focus (on MacOS at least)
 tasks.withType(JavaForkOptions) {
+    jvmArgs "-XX:+UseCompressedOops"
     jvmArgs "-Djava.awt.headless=true"
+    jvmArgs "-Dapple.awt.UIElement=true"
 }

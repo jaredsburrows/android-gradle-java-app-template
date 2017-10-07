@@ -4,21 +4,19 @@ jdk:
   - oraclejdk8
 
 install:
-  - echo y | android update sdk -u -a -t tools
-  - echo y | android update sdk -u -a -t platform-tools
-  - echo y | android update sdk -u -a -t build-tools-26.0.1
-  - echo y | android update sdk -u -a -t android-26
-  - echo y | android update sdk -u -a -t extra-google-m2repository
-  - echo y | android update sdk -u -a -t extra-android-m2repository
+  - echo yes | sdkmanager "tools" &>/dev/null
+  - echo yes | sdkmanager "platform-tools" &>/dev/null
+  - echo yes | sdkmanager "build-tools;26.0.2" &>/dev/null
+  - echo yes | sdkmanager "platforms;android-26" &>/dev/null
 
 script:
-  - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls -Dscan --configure-on-demand --parallel --stacktrace
+  - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls -Dscan --stacktrace
 
 branches:
   except:
     - gh-pages
 
-sudo: required
+sudo: false
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
