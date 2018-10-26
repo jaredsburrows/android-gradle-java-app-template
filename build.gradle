@@ -1,139 +1,124 @@
 buildscript {
-  apply from: rootProject.file("gradle/dependencies.gradle")
+    apply from: 'gradle/dependencies.gradle'
 
-  repositories {
-    google()
-    maven { url "https://plugins.gradle.org/m2/" }
-  }
+    repositories {
+        google()
+        gradlePluginPortal()
+    }
 
-  dependencies {
-    classpath "com.gradle:build-scan-plugin:1.8"
-    classpath "com.android.tools.build:gradle:2.3.3"
-    classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-    classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1"
-    classpath "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
-    classpath "com.github.triplet.gradle:play-publisher:1.2.0"
-    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-    classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
-    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-  }
+    dependencies {
+        classpath 'com.gradle:build-scan-plugin:1.16'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.4'
+        classpath 'com.vanniktech:gradle-android-apk-size-plugin:0.4.0'
+        classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
+        classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.6'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
+    }
 }
 
 repositories {
-  google()
-  maven { url "https://plugins.gradle.org/m2/" }
+    google()
+    gradlePluginPortal()
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = "4.1"
-  distributionType = Wrapper.DistributionType.ALL
-}
-
-apply from: rootProject.file("gradle/scan.gradle")
-apply plugin: "com.android.application"
-apply plugin: "android-command"
-apply plugin: "com.getkeepsafe.dexcount"
-apply plugin: "com.vanniktech.android.apk.size"
-apply plugin: "net.ltgt.errorprone"
-apply plugin: "com.github.ben-manes.versions"
-apply from: rootProject.file("gradle/compile.gradle")
-apply from: rootProject.file("gradle/quality.gradle")
-apply from: rootProject.file("gradle/publish.gradle")
+apply from: 'gradle/scan.gradle'
+apply plugin: 'com.android.application'
+apply plugin: 'android-command'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.vanniktech.android.apk.size'
+apply plugin: 'net.ltgt.errorprone'
+apply plugin: 'com.github.ben-manes.versions'
+apply from: 'gradle/compile.gradle'
+apply from: 'gradle/quality.gradle'
+apply from: 'gradle/publish.gradle'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion buildConfig.compileSdk
 
-  defaultConfig {
-    applicationId "burrows.apps.example.template"
-    versionCode 1
-    versionName "1.0"
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    resConfigs "en"
-    vectorDrawables.useSupportLibrary = true
-  }
-
-  signingConfigs {
-    debug {
-      storeFile rootProject.file("./.buildscript/debug.keystore")
-      storePassword rootProject.ext.debugKeystorePass
-      keyAlias rootProject.ext.debugKeystoreUser
-      keyPassword rootProject.ext.debugKeystorePass
+    defaultConfig {
+        applicationId 'burrows.apps.example.template'
+        versionCode 1
+        versionName '1.0'
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        resConfigs 'en'
+        vectorDrawables.useSupportLibrary = true
     }
-  }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
-      proguardFile "proguard-rules.pro"
-      signingConfig signingConfigs.debug
+    signingConfigs {
+        debug {
+            storeFile file('config/debug.keystore')
+            storePassword buildConfig.signing.password
+            keyAlias buildConfig.signing.alias
+            keyPassword buildConfig.signing.password
+        }
     }
-  }
 
-  compileOptions {
-    sourceCompatibility rootProject.ext.javaVersion
-    targetCompatibility rootProject.ext.javaVersion
-  }
-
-  aaptOptions.cruncherEnabled = rootProject.ext.ci
-
-  dexOptions.preDexLibraries !rootProject.ext.ci
-
-  lintOptions {
-    textOutput "stdout"
-    checkAllWarnings true
-    warningsAsErrors true
-    disable "UnusedResources" // Unused will be removed on release
-    disable "IconExpectedSize" // Using the material icons provided from Google
-    disable "GoogleAppIndexingApiWarning" // We might want to index our app later
-    disable "InvalidPackage" // Butterknife, Okio and Realm
-    disable "ResourceType" // Annotation binding
-    disable "GradleDependency"
-    disable "NewerVersionAvailable"
-  }
-
-  testOptions.unitTests {
-    all {
-      jacoco {
-        includeNoLocationClasses = true
-      }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFile 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
     }
-  }
-}
 
-def supportLibraryVersion = "26.1.0"
-def espressoVersion = "3.0.1"
-def playServicesVersion = "11.4.2"
-def powerMockVersion = "1.7.1"
+    compileOptions {
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
+    }
 
-configurations.all {
-  resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
+    dexOptions.preDexLibraries !ci
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        checkAllWarnings true
+        warningsAsErrors true
+        lintConfig = file('config/lint.xml')
+        checkReleaseBuilds = false
+        checkTestSources = true
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
-  compile "com.android.support:design:$supportLibraryVersion"
-  compile "com.android.support:cardview-v7:$supportLibraryVersion"
-  compile "com.google.android.gms:play-services-ads:$playServicesVersion"
-  compile "com.google.android.gms:play-services-basement:$playServicesVersion"
-  compile "com.google.android.gms:play-services-base:$playServicesVersion"
+    implementation deps.material
+    implementation deps.androidx.cardview
+    implementation deps.gps.ads
+    implementation deps.gps.basement
+    implementation deps.gps.base
 
-  androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
-  androidTestCompile "com.android.support.test:runner:1.0.1"
-  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
-  androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
-  androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion", { exclude group: "com.android.support" }
+    androidTestImplementation deps.androidx.test.runner
+    androidTestImplementation deps.androidx.test.rules
+    androidTestImplementation deps.androidx.test.espresso.core
+    androidTestImplementation deps.androidx.test.espresso.intents
+    androidTestImplementation deps.androidx.test.espresso.contrib
+    androidTestImplementation deps.androidx.test.ext.junit
 
-  testCompile "junit:junit:4.12"
-  testCompile "org.mockito:mockito-inline:2.10.0"
-  testCompile "org.easymock:easymock:3.5"
-  testCompile "org.powermock:powermock-core:$powerMockVersion"
-  testCompile "org.powermock:powermock-module-junit4:$powerMockVersion"
-  testCompile "org.powermock:powermock-api-easymock:$powerMockVersion"
-  testCompile "org.robolectric:shadows-support-v4:3.2"
-  testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
-  testCompile "com.android.support:support-annotations:$supportLibraryVersion"
-  testCompile "org.assertj:assertj-core:1.7.1"
+    testImplementation deps.androidx.test.runner
+    testImplementation deps.androidx.test.rules
+    testImplementation deps.androidx.test.espresso.core
+    testImplementation deps.androidx.test.ext.junit
+    testImplementation deps.junit
+    testImplementation deps.mockito.inline
+    testImplementation deps.easymock
+    testImplementation deps.powermock.core
+    testImplementation deps.powermock.junit4
+    testImplementation deps.powermock.easymock
+    testImplementation deps.robolectric
+    testImplementation deps.assertj
+
+    errorprone deps.errorprone.core
+    errorproneJavac deps.errorprone.javac
 }

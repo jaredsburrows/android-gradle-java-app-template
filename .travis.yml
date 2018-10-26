@@ -4,13 +4,16 @@ jdk:
   - oraclejdk8
 
 install:
-  - echo yes | sdkmanager "tools" &>/dev/null
-  - echo yes | sdkmanager "platform-tools" &>/dev/null
-  - echo yes | sdkmanager "build-tools;26.0.2" &>/dev/null
-  - echo yes | sdkmanager "platforms;android-26" &>/dev/null
+  # Download SDK
+  - yes | sdkmanager "tools" &>/dev/null
+  - yes | sdkmanager "platform-tools" &>/dev/null
+  - yes | sdkmanager "platforms;android-28" &>/dev/null
+  # Update remaining dependencies and accept licenses
+  - yes | sdkmanager --update &>/dev/null
+  - yes | sdkmanager --licenses &>/dev/null
 
 script:
-  - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls -Dscan --stacktrace
+  - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls --scan --stacktrace
 
 branches:
   except:

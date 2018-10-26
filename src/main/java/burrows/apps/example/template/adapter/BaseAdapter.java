@@ -1,6 +1,7 @@
 package burrows.apps.example.template.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 
 import java.util.ArrayList;
@@ -8,193 +9,196 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- */
 @SuppressWarnings("checkstyle:visibilitymodifier")
 public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     /**
      * Data in the Adapter.
      */
-    protected List<T> mData = new ArrayList<>();
+    @NonNull
+    protected List<T> data = new ArrayList<>();
 
     /**
      * Selected items in the Adapter.
      */
-    protected SparseBooleanArray mSelectedItems = new SparseBooleanArray();
+    @NonNull
+    protected SparseBooleanArray selectedItems = new SparseBooleanArray();
 
     /**
-     * Returns the number of elements in the mData.
+     * Returns the number of elements in the data.
      *
-     * @return the number of elements in the mData.
+     * @return the number of elements in the data.
      */
     @Override
     public int getItemCount() {
-        return this.mData.size();
+        return data.size();
     }
 
     /**
-     * Returns the instance of the mData.
+     * Returns the instance of the data.
      *
-     * @return instance of the mData.
+     * @return instance of the data.
      */
+    @NonNull
     public List<T> getList() {
-        return this.mData;
+        return data;
     }
 
     /**
-     * Returns the element at the specified location in the mData.
+     * Returns the element at the specified location in the data.
      *
      * @param location the index of the element to return.
      * @return the element at the specified location.
      * @throws IndexOutOfBoundsException if {@code location < 0 || location >= size()}
      */
-    public T getItem(final int location) {
-        return this.mData.get(location);
+    @NonNull
+    public T getItem(int location) {
+        return data.get(location);
     }
 
     /**
-     * Searches the mData for the specified object and returns the index of the
+     * Searches the data for the specified object and returns the index of the
      * first occurrence.
      *
      * @param object the object to search for.
      * @return the index of the first occurrence of the object or -1 if the
      * object was not found.
      */
-    public int getLocation(final T object) {
-        return this.mData.indexOf(object);
+    public int getLocation(@NonNull T object) {
+        return data.indexOf(object);
     }
 
     /**
-     * Clear the entire adapter using {@link android.support.v7.widget.RecyclerView.Adapter#notifyItemRangeRemoved}.
+     * Clear the entire adapter using {@link RecyclerView.Adapter#notifyItemRangeRemoved}.
      */
     public void clear() {
-        int size = this.mData.size();
+        int size = data.size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                this.mData.remove(0);
+                data.remove(0);
             }
 
-            this.notifyItemRangeRemoved(0, size);
+            notifyItemRangeRemoved(0, size);
         }
     }
 
     /**
-     * Adds the specified object at the end of the mData.
+     * Adds the specified object at the end of the data.
      *
      * @param object the object to add.
      * @return always true.
-     * @throws UnsupportedOperationException if adding to the mData is not supported.
+     * @throws UnsupportedOperationException if adding to the data is not supported.
      * @throws ClassCastException            if the class of the object is inappropriate for this
-     *                                       mData.
-     * @throws IllegalArgumentException      if the object cannot be added to the mData.
+     *                                       data.
+     * @throws IllegalArgumentException      if the object cannot be added to the data.
      */
-    public boolean add(final T object) {
-        final boolean added = this.mData.add(object);
-        this.notifyItemInserted(this.mData.size() + 1);
+    public boolean add(@NonNull T object) {
+        final boolean added = data.add(object);
+        notifyItemInserted(data.size() + 1);
         return added;
     }
 
     /**
-     * Adds the objects in the specified collection to the end of the mData. The
+     * Adds the objects in the specified collection to the end of the data. The
      * objects are added in the order in which they are returned from the
      * collection's iterator.
      *
      * @param collection the collection of objects.
-     * @return {@code true} if the mData is modified, {@code false} otherwise
+     * @return {@code true} if the data is modified, {@code false} otherwise
      * (i.e. if the passed collection was empty).
-     * @throws UnsupportedOperationException if adding to the mData is not supported.
+     * @throws UnsupportedOperationException if adding to the data is not supported.
      * @throws ClassCastException            if the class of an object is inappropriate for this
-     *                                       mData.
-     * @throws IllegalArgumentException      if an object cannot be added to the mData.
+     *                                       data.
+     * @throws IllegalArgumentException      if an object cannot be added to the data.
      */
-    public boolean addAll(final List<T> collection) {
-        final boolean added = this.mData.addAll(collection);
-        this.notifyItemRangeInserted(0, mData.size() + 1);
+    public boolean addAll(@NonNull List<T> collection) {
+        final boolean added = data.addAll(collection);
+        notifyItemRangeInserted(0, data.size() + 1);
         return added;
     }
 
     /**
-     * Inserts the specified object into the mData at the specified location.
+     * Inserts the specified object into the data at the specified location.
      * The object is inserted before the current element at the specified
-     * location. If the location is equal to the size of the mData, the object
+     * location. If the location is equal to the size of the data, the object
      * is added at the end. If the location is smaller than the size of the
-     * mData, then all elements beyond the specified location are moved by one
-     * location towards the end of the mData.
+     * data, then all elements beyond the specified location are moved by one
+     * location towards the end of the data.
      *
      * @param location the index at which to insert.
      * @param object   the object to add.
-     * @throws UnsupportedOperationException if adding to the mData is not supported.
+     * @throws UnsupportedOperationException if adding to the data is not supported.
      * @throws ClassCastException            if the class of the object is inappropriate for this
-     *                                       mData.
-     * @throws IllegalArgumentException      if the object cannot be added to the mData.
+     *                                       data.
+     * @throws IllegalArgumentException      if the object cannot be added to the data.
      * @throws IndexOutOfBoundsException     if {@code location < 0 || location > size()}
      */
-    public void add(final int location, final T object) {
-        this.mData.add(location, object);
-        this.notifyItemInserted(location);
+    public void add(int location, @NonNull T object) {
+        data.add(location, object);
+        notifyItemInserted(location);
     }
 
     /**
-     * Replaces the element at the specified location in the mData with the
-     * specified object. This operation does not change the size of the mData.
+     * Replaces the element at the specified location in the data with the
+     * specified object. This operation does not change the size of the data.
      *
      * @param location the index at which to put the specified object.
      * @param object   the object to insert.
      * @return the previous element at the index.
-     * @throws UnsupportedOperationException if replacing elements in the mData is not supported.
+     * @throws UnsupportedOperationException if replacing elements in the data is not supported.
      * @throws ClassCastException            if the class of an object is inappropriate for this
-     *                                       mData.
-     * @throws IllegalArgumentException      if an object cannot be added to the mData.
+     *                                       data.
+     * @throws IllegalArgumentException      if an object cannot be added to the data.
      * @throws IndexOutOfBoundsException     if {@code location < 0 || location >= size()}
      */
-    public T set(final int location, final T object) {
-        final T insertedObject = this.mData.set(location, object);
-        this.notifyDataSetChanged();
+    @NonNull
+    public T set(int location, @NonNull T object) {
+        final T insertedObject = data.set(location, object);
+        notifyDataSetChanged();
         return insertedObject;
     }
 
     /**
-     * Removes the first occurrence of the specified object from the mData.
+     * Removes the first occurrence of the specified object from the data.
      *
      * @param object the object to remove.
-     * @return true if the mData was modified by this operation, false
+     * @return true if the data was modified by this operation, false
      * otherwise.
-     * @throws UnsupportedOperationException if removing from the mData is not supported.
+     * @throws UnsupportedOperationException if removing from the data is not supported.
      */
-    public boolean remove(final int location, final T object) {
-        final boolean removed = this.mData.remove(object);
-        this.notifyItemRangeRemoved(location, this.mData.size());
+    public boolean remove(int location, @NonNull T object) {
+        final boolean removed = data.remove(object);
+        notifyItemRangeRemoved(location, data.size());
         return removed;
     }
 
     /**
-     * Removes the first occurrence of the specified object from the mData.
+     * Removes the first occurrence of the specified object from the data.
      *
      * @param object the object to remove.
-     * @return true if the mData was modified by this operation, false
+     * @return true if the data was modified by this operation, false
      * otherwise.
-     * @throws UnsupportedOperationException if removing from the mData is not supported.
+     * @throws UnsupportedOperationException if removing from the data is not supported.
      */
-    public boolean remove(final T object) {
-        final int location = this.getLocation(object);
-        final boolean removed = this.mData.remove(object);
-        this.notifyItemRemoved(location);
+    public boolean remove(@NonNull T object) {
+        final int location = getLocation(object);
+        final boolean removed = data.remove(object);
+        notifyItemRemoved(location);
         return removed;
     }
 
     /**
-     * Removes the object at the specified location from the mData.
+     * Removes the object at the specified location from the data.
      *
      * @param location the index of the object to remove.
      * @return the removed object.
-     * @throws UnsupportedOperationException if removing from the mData is not supported.
+     * @throws UnsupportedOperationException if removing from the data is not supported.
      * @throws IndexOutOfBoundsException     if {@code location < 0 || location >= size()}
      */
-    public T remove(final int location) {
-        final T removedObject = this.mData.remove(location);
-        this.notifyItemRemoved(location);
-        this.notifyItemRangeChanged(location, this.mData.size());
+    @NonNull
+    public T remove(int location) {
+        final T removedObject = data.remove(location);
+        notifyItemRemoved(location);
+        notifyItemRangeChanged(location, data.size());
         return removedObject;
     }
 
@@ -205,9 +209,9 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      * @throws ClassCastException if any element does not implement {@code Comparable},
      *                            or if {@code compareTo} throws for any pair of elements.
      */
-    public void sort(final Comparator<? super T> comparator) {
-        Collections.sort(this.mData, comparator);
-        this.notifyItemRangeChanged(0, this.getItemCount());
+    public void sort(@NonNull Comparator<? super T> comparator) {
+        Collections.sort(data, comparator);
+        notifyItemRangeChanged(0, getItemCount());
     }
 
     /**
@@ -216,7 +220,7 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      * @return Number of selected items.
      */
     public int getItemSelectedCount() {
-        return this.mSelectedItems.size();
+        return selectedItems.size();
     }
 
     /**
@@ -224,8 +228,9 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      *
      * @return Selected IDs.
      */
+    @NonNull
     public SparseBooleanArray getSelectedItems() {
-        return this.mSelectedItems;
+        return selectedItems;
     }
 
     /**
@@ -233,11 +238,12 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      *
      * @return Selected IDs.
      */
+    @NonNull
     public List<T> getSelectedList() {
         final List<T> list = new ArrayList<>();
-        final SparseBooleanArray selectedItems = this.getSelectedItems();
+        final SparseBooleanArray selectedItems = getSelectedItems();
         for (int i = 0; i < selectedItems.size(); i++) {
-            final T model = this.getList().get(selectedItems.keyAt(i));
+            final T model = getList().get(selectedItems.keyAt(i));
             list.add(model);
         }
         return list;
@@ -247,8 +253,8 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      * Remove all current selections.
      */
     public void removeSelections() {
-        this.mSelectedItems.clear();
-        this.notifyDataSetChanged();
+        selectedItems.clear();
+        notifyDataSetChanged();
     }
 
     /**
@@ -256,8 +262,8 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      *
      * @param location location of view.
      */
-    public void toggleSelection(final int location) {
-        this.selectItem(location, !this.mSelectedItems.get(location));
+    public void toggleSelection(int location) {
+        selectItem(location, !selectedItems.get(location));
     }
 
     /**
@@ -266,13 +272,13 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
      * @param location location of view.
      * @param value    True if view is selected.
      */
-    public void selectItem(final int location, final boolean value) {
+    public void selectItem(int location, boolean value) {
         if (value) {
-            this.mSelectedItems.put(location, true);
+            selectedItems.put(location, true);
         } else {
-            this.mSelectedItems.delete(location);
+            selectedItems.delete(location);
         }
 
-        this.notifyItemChanged(location);
+        notifyItemChanged(location);
     }
 }

@@ -3,6 +3,7 @@ package burrows.apps.example.template.util;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import androidx.annotation.IntRange;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import org.junit.Before;
@@ -26,9 +27,7 @@ import static org.powermock.api.easymock.PowerMock.verifyAll;
 import static org.powermock.api.support.SuppressCode.suppressConstructor;
 
 /**
- * Powermock and Easymock test.
- *
- * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
+ * Junit Test using Powermock/Easymock with Hamcrest matchers.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(GoogleApiAvailability.class)
@@ -37,7 +36,8 @@ public class PlayServicesUtilsTest {
     private Dialog mockDialog;
     private GoogleApiAvailability mockSingleton;
 
-    @Before public void setUp() {
+    @Before
+    public void setUp() {
         mockActivity = createMock(Activity.class);
         mockDialog = createMock(Dialog.class);
 
@@ -47,7 +47,8 @@ public class PlayServicesUtilsTest {
         expect(GoogleApiAvailability.getInstance()).andReturn(mockSingleton).anyTimes();
     }
 
-    @Test public void testSuccess() {
+    @Test
+    public void testSuccess() {
         expect(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).andReturn(SUCCESS);
 
         replay(GoogleApiAvailability.class);
@@ -58,27 +59,28 @@ public class PlayServicesUtilsTest {
         verifyAll();
     }
 
-    @Test public void testServiceDisabled() {
+    @Test
+    public void testServiceDisabled() {
         failTest(ConnectionResult.SERVICE_DISABLED);
     }
 
-    @Test public void testServiceInvalid() {
+    @Test
+    public void testServiceInvalid() {
         failTest(ConnectionResult.SERVICE_INVALID);
     }
 
-    @Test public void testServiceMissing() {
+    @Test
+    public void testServiceMissing() {
         failTest(ConnectionResult.SERVICE_MISSING);
     }
 
-    @Test public void testServiceVersionUpdateRequired() {
+    @Test
+    public void testServiceVersionUpdateRequired() {
         failTest(ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED);
     }
 
-    @Test public void testFailSwitchCase() {
-        failTest(-1);
-    }
-
-    public void failTest(int error) {
+    private void failTest(@IntRange(from = ConnectionResult.SUCCESS,
+        to = ConnectionResult.RESTRICTED_PROFILE) int error) {
         expect(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).andReturn(error);
         expect(mockSingleton.getErrorDialog(mockActivity, error, 0)).andReturn(mockDialog);
 

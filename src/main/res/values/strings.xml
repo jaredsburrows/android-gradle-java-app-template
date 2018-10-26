@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources,TypographyDashes">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
 
-    <string name="app_name">AndroidGradleTemplate</string>
-    <string name="app_analytics" translatable="false"></string>
-    <string name="app_ad" translatable="false">ca-app-pub-7025090077419387/4814239814</string>
+    <string name="app_name">Android Gradle Template</string>
+    <string name="app_ads_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_ad_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_ad_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="button_launch_interstitial">Launch New Interstitial</string>
 
 </resources>

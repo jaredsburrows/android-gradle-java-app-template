@@ -1,12 +1,60 @@
-// android plugin
 ext {
-  compileSdkVersion = 26
-  buildToolsVersion = "26.0.2"
-  minSdkVersion = 19
-  targetSdkVersion = 26
-  javaVersion = "1.7"
-  debugKeystoreUser = "androiddebugkey"
-  debugKeystorePass = "android"
-
-  ci = rootProject.hasProperty("ci")
+    ci = hasProperty("ci")
 }
+
+ext.buildConfig = [
+    'compileSdk': 28,
+    'minSdk'    : 19,
+    'targetSdk' : 28,
+    'signing'   : [
+        'alias'   : "androiddebugkey",
+        'password': "android"
+    ]
+]
+
+ext.versions = [
+    'java'     : '1.8',
+    'powermock': '1.7.4',
+    'espresso' : '3.1.0',
+    'gps'      : '11.6.0'
+]
+
+ext.deps = [
+    'androidx'   : [
+        'cardview': 'androidx.cardview:cardview:1.0.0',
+        'test'    : [
+            'runner'  : 'androidx.test:runner:1.1.0',
+            'rules'   : 'androidx.test:rules:1.1.0',
+            'espresso': [
+                'core'   : "androidx.test.espresso:espresso-core:$versions.espresso",
+                'intents': "androidx.test.espresso:espresso-intents:$versions.espresso",
+                'contrib': "androidx.test.espresso:espresso-contrib:$versions.espresso"
+            ],
+            'ext'     : [
+                'junit': 'androidx.test.ext:junit:1.0.0'
+            ]
+        ]
+    ],
+    'material'   : 'com.google.android.material:material:1.0.0',
+    'gps'        : [
+        'ads'     : "com.google.android.gms:play-services-ads:$versions.gps",
+        'basement': "com.google.android.gms:play-services-basement:$versions.gps",
+        'base'    : "com.google.android.gms:play-services-base:$versions.gps",
+    ],
+    'junit'      : 'junit:junit:4.12',
+    'assertj'    : 'org.assertj:assertj-core:1.7.1',
+    'mockito'    : [
+        'inline': 'org.mockito:mockito-inline:2.23.0'
+    ],
+    'errorprone' : [
+        'core' : 'com.google.errorprone:error_prone_core:2.3.2',
+        'javac': 'com.google.errorprone:javac:9+181-r4173-1'
+    ],
+    'robolectric': 'org.robolectric:robolectric:4.0',
+    'easymock'   : 'org.easymock:easymock:3.6',
+    'powermock'  : [
+        'core'    : "org.powermock:powermock-core:$versions.powermock",
+        'junit4'  : "org.powermock:powermock-module-junit4:$versions.powermock",
+        'easymock': "org.powermock:powermock-api-easymock:$versions.powermock"
+    ]
+]

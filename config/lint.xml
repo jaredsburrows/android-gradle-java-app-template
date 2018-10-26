@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lint>
+    <!-- Unused will be removed on release -->
+    <issue id="UnusedResources" severity="ignore"/>
+
+    <!-- Ignore indexing through Google APIs -->
+    <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
+
+    <!-- Manual upgrades -->
+    <issue id="GradleDependency" severity="ignore"/>
+    <issue id="NewerVersionAvailable" severity="ignore"/>
+
+    <!-- AGP 3.0 issues -->
+    <issue id="MissingRegistered" severity="ignore"/>
+
+    <!-- AGP 3.0 issues -->
+    <issue id="MissingRegistered" severity="ignore"/>
+
+    <!-- Dependency versioning -->
+    <issue id="GradleCompatible" severity="ignore"/>
+    <issue id="GradleDynamicVersion" severity="ignore"/>
+</lint>
