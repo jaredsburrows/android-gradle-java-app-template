@@ -13,7 +13,7 @@ http_archive(
     url = "https://github.com/erickj/bazel_json/archive/%s.zip" % BAZEL_JSON_COMMIT,
 )
 
-RULES_MAVEN_COMMIT = "a4b807ba8843983a6c8fc422e37c1552bfe89160"
+RULES_MAVEN_COMMIT = "0.0.3"
 
 http_archive(
     name = "rules_maven",
