@@ -1,19 +1,10 @@
-android_sdk_repository(name = "androidsdk", path = "/Users/jin/code/android_sdk")
+android_sdk_repository(
+    name = "androidsdk",
+)
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-BAZEL_JSON_COMMIT = "0d26dfd8d22c8d5476f1e49f6a9547e0f030fb8f"
-
-# This causes the build to require `--incompatible_disallow_slash_operator=false`.
-# See https://github.com/erickj/bazel_json/pull/1
-# For convenience, add `build --incompatible_disallow_slash_operator=false` to your .bazelrc.
-http_archive(
-    name = "bazel_json",
-    strip_prefix = "bazel_json-%s" % BAZEL_JSON_COMMIT,
-    url = "https://github.com/erickj/bazel_json/archive/%s.zip" % BAZEL_JSON_COMMIT,
-)
-
-RULES_MAVEN_COMMIT = "0.0.3"
+RULES_MAVEN_COMMIT = "0.0.4"
 
 http_archive(
     name = "rules_maven",
