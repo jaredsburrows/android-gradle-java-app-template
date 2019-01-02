@@ -9,53 +9,52 @@
 
 ## Technologies used:
 #### Build Tools:
-|Name|Description|
-|---|---|
-| [Bazel](https://bazel.build) | Bazel build system |
-| [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | Official SDK |
+| Name                                                                                     | Description          |
+|------------------------------------------------------------------------------------------|----------------------|
+| [Bazel](https://bazel.build)                                                             | Bazel build system   |
+| [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1)           | Official SDK         |
 | [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | Official Build Tools |
-| [Android Studio](http://tools.android.com/recent) or | Official IDE |
-| [Intellij](https://www.jetbrains.com/idea/download/) | Intellij IDE |
+| [Android Studio](http://tools.android.com/recent) or                                     | Official IDE         |
+| [Intellij](https://www.jetbrains.com/idea/download/)                                     | Intellij IDE         |
 
 #### Android Libraries:
-|Name|Description|
-|---|---|
-| [Android Support-v4](http://developer.android.com/tools/support-library/features.html#v4) | Support Library API 4+ |
+| Name                                                                                                  | Description            |
+|-------------------------------------------------------------------------------------------------------|------------------------|
+| [Android Support-v4](http://developer.android.com/tools/support-library/features.html#v4)             | Support Library API 4+ |
 | [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | Support Library API 7+ |
 
 #### Testing Frameworks:
-|Name|Description|
-|---|---|
+| Name                                                                  | Description               |
+|-----------------------------------------------------------------------|---------------------------|
 | [Espresso](https://google.github.io/android-testing-support-library/) | Instrumentation Framework |
-| [Robolectric](https://github.com/robolectric/robolectric) | Unit Testing Framework |
+| [Robolectric](https://github.com/robolectric/robolectric)             | Unit Testing Framework    |
 
 #### Reporting Plugins:
-|Name|Description|
-|---|---|
-| [JaCoCo](http://www.eclemma.org/jacoco/) | JaCoCo Test Coverage |
-| [Coveralls](https://coveralls.io/) | Hosts test reports published from TravisCI |
+| Name                                     | Description                                |
+|------------------------------------------|--------------------------------------------|
+| [JaCoCo](http://www.eclemma.org/jacoco/) | JaCoCo Test Coverage                       |
+| [Coveralls](https://coveralls.io/)       | Hosts test reports published from TravisCI |
 
 #### Continuous Integration:
-|Name|Description|
-|---|---|
+| Name                                                          | Description                                                 |
+|---------------------------------------------------------------|-------------------------------------------------------------|
 | [TravisCI](http://docs.travis-ci.com/user/languages/android/) | Build Server(Builds, Tests, Publishes reports to Coveralls) |
 
 #### Publishing to Google Play:
-|Name|Description|
-|---|---|
-| [Gradle-play-publisher](https://github.com/Triple-T/gradle-play-publisher) | Publishes your app to Google Play |
+| Name | Description |
+|------|-------------|
+| WIP  | WIP         |
 
 # Getting Started:
-## `Android Studio` or `Intellij` Support(Simple):
-- **Import/Open this project with Android Studio/Intellij(click on `build.gradle`)**
+## `Android Studio` or `Intellij` Support (Simple):
+- **Import/Open this project with Android Studio/Intellij**
+  - WIP
 
 - **Instrumentation Tests:**
-  - Change the Build Variant Test Artifact to `Instrumentation Tests`
-  - Right click an instrumentation test located in `src/main/androidTest` and click test
+  - WIP
 
 - **Unit Tests:**
-  - Change the Build Variant Test Artifact to `Unit Tests`
-  - Right click a unit test located in `src/main/test` and click test
+  - WIP
 
 ## Building and Running
 
