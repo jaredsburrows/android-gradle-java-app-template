@@ -1,4 +1,4 @@
-> This is a fork of https://github.com/jaredsburrows/android-gradle-java-app-template with Bazel the build system, instead of Gradle.
+> This is a fork of https://github.com/jaredsburrows/android-gradle-java-app-template with Bazel as the build system, instead of Gradle.
 
 > This is a WIP: many features are not yet ported over.
 
