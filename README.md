@@ -1,18 +1,17 @@
+> This is a fork of https://github.com/jaredsburrows/android-gradle-java-app-template with Bazel the build system, instead of Gradle.
+
+> This is a WIP: many features are not yet ported over.
+
 # Android Gradle Java App Template 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![TravisCI OSX Build](https://img.shields.io/travis/jaredsburrows/android-gradle-java-app-template/master.svg)](https://travis-ci.org/jaredsburrows/android-gradle-java-app-template)
-[![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-java-app-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-java-app-template?branch=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
-
-Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock + JaCoCo
 
 ## Technologies used:
 #### Build Tools:
 |Name|Description|
 |---|---|
-| [Gradle](http://gradle.org/docs/current/release-notes) | Gradle build system |
-| [Android Gradle Build Tools](http://tools.android.com/tech-docs/new-build-system) | Official Gradle Plugin |
+| [Bazel](https://bazel.build) | Bazel build system |
 | [Android SDK](http://developer.android.com/tools/revisions/platforms.html#5.1) | Official SDK |
 | [Android SDK Build Tools](http://developer.android.com/tools/revisions/build-tools.html) | Official Build Tools |
 | [Android Studio](http://tools.android.com/recent) or | Official IDE |
@@ -61,35 +60,37 @@ Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock 
 ## Building and Running
 
 
-This project builds with [Gradle](www.gradle.org) and the Android Build [tools](http://tools.android.com/tech-docs/new-build-system).
+This project builds with [Bazel](https://bazel.build) and the Android Build [tools](http://tools.android.com/tech-docs/new-build-system).
 
 
 **Build the APK:**
 
-    $ gradlew assembleDebug
+    $ bazel build //src/main:template_app
 
 **Install the APK:**
 
-    $ gradlew installDebug
+    $ bazel mobile-install //src/main:template_app
+    
+or:
+
+    $ bazel build //src/main:template_app && adb install bazel-bin/src/main/template_app.apk
 
 **Run the App:**
 
-    $ gradlew runDebug
+    $ bazel mobile-install //src/main:template_app --start_app
 
 ## Testing
-
 
 **Running the Unit Tests:**
 
 
 The [Junit](http://junit.org/junit4/) and [Robolectric](https://github.com/robolectric/robolectric) tests run on the JVM, no need for emulators or real devices.
 
-
-    $ gradlew testDebug
+    $ WIP
     
 **Run a single unit test in the `debug flavor`:**
 
-    $ gradlew testDebug --tests="*MainActivityTest*"
+    $ WIP
 
     
 **Running the Instrumentation Tests:**
@@ -97,7 +98,7 @@ The [Junit](http://junit.org/junit4/) and [Robolectric](https://github.com/robol
 
 The [Espresso](https://developer.android.com/training/testing/ui-testing/espresso-testing.html) instrumentation tests run on the device.
 
-    $ gradlew connectedDebugAndroidTest
+    $ WIP
     
 
 ## Reports
@@ -109,7 +110,7 @@ The [Espresso](https://developer.android.com/training/testing/ui-testing/espress
 The [Lint](http://developer.android.com/tools/help/lint.html) plugin generates reports based off the source code.
 
 
-    $ gradlew lintDebug
+    $ WIP
 
 
 **Generate Jacoco Test Coverage:**
@@ -118,4 +119,4 @@ The [Lint](http://developer.android.com/tools/help/lint.html) plugin generates r
 The [Jacoco](http://www.eclemma.org/jacoco/) plugin generates coverage reports based off the unit tests.
 
 
-    $ gradlew jacocoDebugReport
+    $ WIP
