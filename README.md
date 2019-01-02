@@ -2,7 +2,7 @@
 
 > This is a WIP: many features are not yet ported over.
 
-# Android Gradle Java App Template 
+# Android Bazel Java App Template 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
