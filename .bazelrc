@@ -1,2 +1,0 @@
-build --incompatible_disable_depset_in_cc_user_flags=false
-build --incompatible_disallow_slash_operator=false
