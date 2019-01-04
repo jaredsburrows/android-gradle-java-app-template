@@ -85,13 +85,17 @@ or:
 
 The [Junit](http://junit.org/junit4/) and [Robolectric](https://github.com/robolectric/robolectric) tests run on the JVM, no need for emulators or real devices.
 
-    $ WIP
-    
-**Run a single unit test in the `debug flavor`:**
+    $ bazel test //src/test:all
 
-    $ WIP
+**Run a single unit test (`android_local_test`):**
 
-    
+    $ bazel test //src/test:play_services_utils_test_api_28
+
+**Get the list of all `android_local_test` targets :**
+
+    $ bazel query 'kind(android_local_test, //src/test/...)'
+
+
 **Running the Instrumentation Tests:**
 
 

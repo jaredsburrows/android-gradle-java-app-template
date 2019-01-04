@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="burrows.apps.example.template.activity">
+
+    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="${targetSdkVersion}" />
+</manifest>
