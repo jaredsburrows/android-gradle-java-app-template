@@ -1,0 +1,48 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [ opened, labeled, unlabeled, synchronize ]
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
+jobs:
+  android:
+    name: Android API ${{ matrix.api-level }} / JDK ${{ matrix.java-version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level:
+          - 33
+        java-version:
+          - 19
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3.4.0
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1.0.6
+
+      - name: Setup Java ${{ matrix.java-version }}
+        uses: actions/setup-java@v3.10.0
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+          cache: gradle
+
+      - name: Build Debug APKs and Run lint checks
+        uses: gradle/gradle-build-action@v2.4.0
+        with:
+          arguments: assembleDebug lintDebug -s
+
+      - name: Run Debug Unit Tests
+        uses: gradle/gradle-build-action@v2.4.0
+        with:
+          arguments: testDebug -s
