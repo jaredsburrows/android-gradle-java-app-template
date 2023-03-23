@@ -1,26 +1,48 @@
-name: Android CI
+name: build
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    types: [ opened, labeled, unlabeled, synchronize ]
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
 
 jobs:
-  build:
-
+  android:
+    name: Android API ${{ matrix.api-level }} / JDK ${{ matrix.java-version }}
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level:
+          - 33
+        java-version:
+          - 19
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3.4.0
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1.0.6
+
+      - name: Setup Java ${{ matrix.java-version }}
+        uses: actions/setup-java@v3.10.0
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+          cache: gradle
+
+      - name: Build Debug APKs and Run lint checks
+        uses: gradle/gradle-build-action@v2.4.0
+        with:
+          arguments: assembleDebug lintDebug -s
+
+      - name: Run Debug Unit Tests
+        uses: gradle/gradle-build-action@v2.4.0
+        with:
+          arguments: testDebug -s
