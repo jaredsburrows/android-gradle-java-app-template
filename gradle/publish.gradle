@@ -1,7 +1,0 @@
-apply plugin: 'com.github.triplet.play'
-
-play {
-    serviceAccountEmail = 'jaredsburrows@gmail.com'
-    pk12File = file('config/key.p12')
-    track = 'production' // or 'beta' or 'alpha'
-}

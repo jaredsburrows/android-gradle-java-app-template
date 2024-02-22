@@ -1,128 +1,158 @@
 package burrows.apps.example.template.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
-import burrows.apps.example.template.R;
-import burrows.apps.example.template.util.AdUtils;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
-public class PlaceholderFragment extends Fragment {
-    /**
-     * Static Adview.
-     */
-    private AdView adView;
-    /**
-     * AdMob Full-Page Ad.
-     */
-    private InterstitialAd interstitialAd;
-    /**
-     * Button to launch Interstitial Ad.
-     */
-    private AppCompatButton startInterstitial;
-    /**
-     * ClickListener for Button.
-     */
-    private final OnClickListener onClickListener = v -> showInterstitialAd();
-    private final AdListener adListener = new AdListener() {
-        @Override
-        public void onAdClosed() {
-            super.onAdClosed();
-            Toast.makeText(requireActivity(), "Ad has closed.", Toast.LENGTH_SHORT).show();
-        }
+import burrows.apps.example.template.R;
+import burrows.apps.example.template.util.AdUtils;
 
-        @Override
-        public void onAdFailedToLoad(final int errorCode) {
-            super.onAdFailedToLoad(errorCode);
-            Toast.makeText(requireActivity(), "Ad has failed to load: " + AdUtils.getErrorReason(errorCode), Toast.LENGTH_SHORT).show();
-        }
+public final class PlaceholderFragment extends Fragment {
+  /**
+   * Static Adview.
+   */
+  private AdView adView;
+  /**
+   * AdMob Full-Page Ad.
+   */
+  InterstitialAd loadedInterstitialAd;
+  /**
+   * Button to launch Interstitial Ad.
+   */
+  private Button startInterstitial;
+  /**
+   * ClickListener for Button.
+   */
+  private final OnClickListener onClickListener = v -> showInterstitialAd();
+  private final AdListener adListener = new AdListener() {
+    @Override
+    public void onAdClicked() {
+      super.onAdClicked();
+      Toast.makeText(requireActivity(), "Ad clicked.", Toast.LENGTH_SHORT).show();
+    }
 
-        @Override
-        public void onAdLeftApplication() {
-            super.onAdLeftApplication();
-            Toast.makeText(requireActivity(), "Ad has left the application.", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onAdClosed() {
+      super.onAdClosed();
+      Toast.makeText(requireActivity(), "Ad closed.", Toast.LENGTH_SHORT).show();
+    }
 
-        @Override
-        public void onAdOpened() {
-            super.onAdOpened();
-            Toast.makeText(requireActivity(), "Ad has opened.", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onAdFailedToLoad(LoadAdError errorCode) {
+      super.onAdFailedToLoad(errorCode);
+      Toast.makeText(requireActivity(), "Ad failed to load: " +
+        AdUtils.getErrorReason(errorCode.getCode()), Toast.LENGTH_SHORT).show();
+    }
 
-        @Override
-        public void onAdLoaded() {
-            super.onAdLoaded();
-            Toast.makeText(requireActivity(), "Ad has loaded.", Toast.LENGTH_SHORT).show();
-        }
+    @Override
+    public void onAdImpression() {
+      super.onAdImpression();
+      Toast.makeText(requireActivity(), "Ad impression.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAdLoaded() {
+      super.onAdLoaded();
+      Toast.makeText(requireActivity(), "Ad loaded.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAdOpened() {
+      super.onAdOpened();
+      Toast.makeText(requireActivity(), "Ad opened.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAdSwipeGestureClicked() {
+      super.onAdSwipeGestureClicked();
+      Toast.makeText(requireActivity(), "Ad swipe gesture.", Toast.LENGTH_SHORT).show();
+    }
+  };
+
+  private final InterstitialAdLoadCallback interstitialAdLoadCallback =
+    new InterstitialAdLoadCallback() {
+      @Override
+      public void onAdLoaded(InterstitialAd interstitialAd) {
+        // The interstitialAd has loaded, show the ad.
+        Toast.makeText(requireActivity(), "Ad loaded.", Toast.LENGTH_SHORT).show();
+        loadedInterstitialAd = interstitialAd;
+      }
+
+      @Override
+      public void onAdFailedToLoad(LoadAdError loadAdError) {
+        // Handle the error
+        Toast.makeText(requireActivity(), "Ad failed to load: " +
+          AdUtils.getErrorReason(loadAdError.getCode()), Toast.LENGTH_SHORT).show();
+      }
     };
 
-    @NonNull
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+  @Override
+  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                           @Nullable Bundle savedInstanceState) {
+    super.onCreateView(inflater, container, savedInstanceState);
 
-        final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+    final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        startInterstitial = rootView.findViewById(R.id.buttonStartInterstitial);
-        startInterstitial.setOnClickListener(onClickListener);
+    startInterstitial = rootView.findViewById(R.id.buttonStartInterstitial);
+    startInterstitial.setOnClickListener(onClickListener);
 
-        adView = rootView.findViewById(R.id.adView);
-        adView.setAdListener(adListener);
-        adView.loadAd(new AdRequest.Builder().build());
+    adView = rootView.findViewById(R.id.adView);
+    adView.setAdListener(adListener);
+    adView.loadAd(new AdRequest.Builder().build());
 
-        interstitialAd = new InterstitialAd(rootView.getContext());
-        interstitialAd.setAdUnitId(getString(R.string.app_ad_interstitial));
-        interstitialAd.setAdListener(adListener);
-        interstitialAd.loadAd(new AdRequest.Builder().build());
+    InterstitialAd.load(requireActivity(), getString(R.string.app_ad_interstitial),
+      new AdRequest.Builder().build(), interstitialAdLoadCallback);
 
-        return rootView;
+    return rootView;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+
+    if (adView != null) {
+      adView.resume();
+    }
+  }
+
+  @Override
+  public void onPause() {
+    if (adView != null) {
+      adView.pause();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    super.onPause();
+  }
 
-        if (adView != null) {
-            adView.resume();
-        }
+  @Override
+  public void onDestroy() {
+    if (adView != null) {
+      adView.destroy();
     }
 
-    @Override
-    public void onPause() {
-        if (adView != null) {
-            adView.pause();
-        }
+    super.onDestroy();
+  }
 
-        super.onPause();
+  private void showInterstitialAd() {
+    if (loadedInterstitialAd != null) {
+      loadedInterstitialAd.show(requireActivity());
+    } else {
+      Toast.makeText(requireActivity(), "Interstitial Ad has not loaded.",
+        Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-
-        super.onDestroy();
-    }
-
-    private void showInterstitialAd() {
-        if (interstitialAd.isLoaded()) {
-            interstitialAd.show();
-        } else {
-            // Simply let the user know it has not been loaded and try again.
-            Toast.makeText(requireActivity(), "Interstitial Ad has not loaded.", Toast.LENGTH_SHORT).show();
-            interstitialAd.loadAd(new AdRequest.Builder().build());
-        }
-    }
+  }
 }

@@ -1,97 +1,92 @@
 package burrows.apps.example.template.util;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
+
 import androidx.annotation.IntRange;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
-import static burrows.apps.example.template.util.PlayServicesUtils.hasGooglePlayServices;
-import static com.google.android.gms.common.ConnectionResult.SUCCESS;
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.expect;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.powermock.api.easymock.PowerMock.createMock;
-import static org.powermock.api.easymock.PowerMock.expectLastCall;
-import static org.powermock.api.easymock.PowerMock.mockStatic;
-import static org.powermock.api.easymock.PowerMock.replay;
-import static org.powermock.api.easymock.PowerMock.replayAll;
-import static org.powermock.api.easymock.PowerMock.verifyAll;
-import static org.powermock.api.support.SuppressCode.suppressConstructor;
+@RunWith(AndroidJUnit4.class)
+public final class PlayServicesUtilsTest {
+  @Rule
+  public final MockitoRule rule = MockitoJUnit.rule();
+  @Mock
+  private Activity mockActivity;
+  @Mock
+  private Dialog mockDialog;
+  @Mock
+  private GoogleApiAvailability mockSingleton;
 
-/**
- * Junit Test using Powermock/Easymock with Hamcrest matchers.
- */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(GoogleApiAvailability.class)
-public class PlayServicesUtilsTest {
-    private Activity mockActivity;
-    private Dialog mockDialog;
-    private GoogleApiAvailability mockSingleton;
+  private static MockedStatic<GoogleApiAvailability> mockedStatic;
 
-    @Before
-    public void setUp() {
-        mockActivity = createMock(Activity.class);
-        mockDialog = createMock(Dialog.class);
+  @Before
+  public void setUp() {
+    mockedStatic = mockStatic(GoogleApiAvailability.class);
+    when(GoogleApiAvailability.getInstance()).thenReturn(mockSingleton);
+  }
 
-        suppressConstructor(GoogleApiAvailability.class);
-        mockStatic(GoogleApiAvailability.class);
-        mockSingleton = createMock(GoogleApiAvailability.class);
-        expect(GoogleApiAvailability.getInstance()).andReturn(mockSingleton).anyTimes();
-    }
+  @After
+  public void tearDown() {
+    mockedStatic.close();
+  }
 
-    @Test
-    public void testSuccess() {
-        expect(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).andReturn(SUCCESS);
+  @Test
+  public void testSuccess() {
+    when(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).thenReturn(ConnectionResult.SUCCESS);
 
-        replay(GoogleApiAvailability.class);
-        replay(mockSingleton);
-        replayAll(mockActivity);
+    assertTrue(PlayServicesUtils.hasGooglePlayServices(mockActivity, GoogleApiAvailability.getInstance()));
+  }
 
-        assertThat(hasGooglePlayServices(mockActivity, GoogleApiAvailability.getInstance()), is(true));
-        verifyAll();
-    }
+  @Test
+  public void testServiceDisabled() {
+    failTest(ConnectionResult.SERVICE_DISABLED);
+  }
 
-    @Test
-    public void testServiceDisabled() {
-        failTest(ConnectionResult.SERVICE_DISABLED);
-    }
+  @Test
+  public void testServiceInvalid() {
+    failTest(ConnectionResult.SERVICE_INVALID);
+  }
 
-    @Test
-    public void testServiceInvalid() {
-        failTest(ConnectionResult.SERVICE_INVALID);
-    }
+  @Test
+  public void testServiceMissing() {
+    failTest(ConnectionResult.SERVICE_MISSING);
+  }
 
-    @Test
-    public void testServiceMissing() {
-        failTest(ConnectionResult.SERVICE_MISSING);
-    }
+  @Test
+  public void testServiceVersionUpdateRequired() {
+    failTest(ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED);
+  }
 
-    @Test
-    public void testServiceVersionUpdateRequired() {
-        failTest(ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED);
-    }
+  private void failTest(@IntRange(from = ConnectionResult.SUCCESS, to = ConnectionResult.RESTRICTED_PROFILE) int error) {
+    when(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).thenReturn(error);
+    when(mockSingleton.getErrorDialog(mockActivity, error, 0)).thenReturn(mockDialog);
+    doNothing().when(mockDialog).setOnCancelListener(any());
+    doNothing().when(mockDialog).show();
 
-    private void failTest(@IntRange(from = ConnectionResult.SUCCESS,
-        to = ConnectionResult.RESTRICTED_PROFILE) int error) {
-        expect(mockSingleton.isGooglePlayServicesAvailable(mockActivity)).andReturn(error);
-        expect(mockSingleton.getErrorDialog(mockActivity, error, 0)).andReturn(mockDialog);
+    assertFalse(PlayServicesUtils.hasGooglePlayServices(mockActivity, GoogleApiAvailability.getInstance()));
 
-        mockDialog.setOnCancelListener(anyObject(DialogInterface.OnCancelListener.class));
-        expectLastCall().once();
-
-        mockDialog.show();
-        expectLastCall().once();
-
-        replayAll(mockActivity, mockDialog);
-        assertThat(hasGooglePlayServices(mockActivity, GoogleApiAvailability.getInstance()), is(false));
-        verifyAll();
-    }
+    verify(mockDialog).setOnCancelListener(any());
+    verify(mockDialog).show();
+  }
 }

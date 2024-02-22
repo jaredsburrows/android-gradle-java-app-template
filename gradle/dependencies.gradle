@@ -1,11 +1,7 @@
-ext {
-    ci = hasProperty("ci")
-}
-
 ext.buildConfig = [
-    'compileSdk': 28,
-    'minSdk'    : 19,
-    'targetSdk' : 28,
+    'compileSdk': 34,
+    'minSdk'    : 30,
+    'targetSdk' : 34,
     'signing'   : [
         'alias'   : "androiddebugkey",
         'password': "android"
@@ -13,9 +9,7 @@ ext.buildConfig = [
 ]
 
 ext.versions = [
-    'java'     : '1.8',
-    'powermock': '1.7.4',
-    'espresso' : '3.1.0',
+    'espresso' : '3.5.1',
     'gps'      : '11.6.0'
 ]
 
@@ -23,38 +17,32 @@ ext.deps = [
     'androidx'   : [
         'cardview': 'androidx.cardview:cardview:1.0.0',
         'test'    : [
-            'runner'  : 'androidx.test:runner:1.1.0',
-            'rules'   : 'androidx.test:rules:1.1.0',
+            'runner'  : 'androidx.test:runner:1.5.2',
+            'rules'   : 'androidx.test:rules:1.5.0',
             'espresso': [
                 'core'   : "androidx.test.espresso:espresso-core:$versions.espresso",
                 'intents': "androidx.test.espresso:espresso-intents:$versions.espresso",
                 'contrib': "androidx.test.espresso:espresso-contrib:$versions.espresso"
             ],
             'ext'     : [
-                'junit': 'androidx.test.ext:junit:1.0.0'
+                'junit': 'androidx.test.ext:junit:1.1.5'
             ]
         ]
     ],
-    'material'   : 'com.google.android.material:material:1.0.0',
+    'material'   : 'com.google.android.material:material:1.11.0',
     'gps'        : [
-        'ads'     : "com.google.android.gms:play-services-ads:$versions.gps",
-        'basement': "com.google.android.gms:play-services-basement:$versions.gps",
-        'base'    : "com.google.android.gms:play-services-base:$versions.gps",
+        'ads'     : "com.google.android.gms:play-services-ads:22.6.0",
+        'basement': "com.google.android.gms:play-services-basement:18.3.0",
+        'base'    : "com.google.android.gms:play-services-base:18.3.0",
     ],
-    'junit'      : 'junit:junit:4.12',
-    'assertj'    : 'org.assertj:assertj-core:1.7.1',
+    'junit'      : 'junit:junit:4.13.2',
+    'assertj'    : 'org.assertj:assertj-core:3.25.3',
     'mockito'    : [
-        'inline': 'org.mockito:mockito-inline:2.23.0'
+        'inline': 'org.mockito:mockito-inline:5.2.0'
     ],
     'errorprone' : [
         'core' : 'com.google.errorprone:error_prone_core:2.3.2',
         'javac': 'com.google.errorprone:javac:9+181-r4173-1'
     ],
-    'robolectric': 'org.robolectric:robolectric:4.0',
-    'easymock'   : 'org.easymock:easymock:3.6',
-    'powermock'  : [
-        'core'    : "org.powermock:powermock-core:$versions.powermock",
-        'junit4'  : "org.powermock:powermock-module-junit4:$versions.powermock",
-        'easymock': "org.powermock:powermock-api-easymock:$versions.powermock"
-    ]
+    'robolectric': 'org.robolectric:robolectric:4.11.1',
 ]

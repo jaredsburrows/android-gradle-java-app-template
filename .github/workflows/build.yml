@@ -9,19 +9,13 @@ on:
 
 env:
   GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+  JAVA_VERSION: 20 # can't use Java 21 yet due to mockito issues
+  ANDROID_API_LEVEL: 34
 
 jobs:
   android:
     name: Android API ${{ matrix.api-level }} / JDK ${{ matrix.java-version }}
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level:
-          - 33
-        java-version:
-          - 19
 
     steps:
       - name: Checkout Project
