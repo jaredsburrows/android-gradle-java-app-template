@@ -1,7 +1,7 @@
 # Android Gradle Java App Template
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![build](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/android.yml/badge.svg)](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/android.yml)
+[![build](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/build.yml/badge.svg)](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
 Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock
