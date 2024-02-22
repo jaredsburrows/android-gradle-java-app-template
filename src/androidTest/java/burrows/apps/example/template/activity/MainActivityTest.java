@@ -1,6 +1,9 @@
 package burrows.apps.example.template.activity;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -15,7 +18,7 @@ public final class MainActivityTest {
   public final ActivityScenarioRule<MainActivity> activityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
   @Test
-  public void testOnCreateNotNull() {
-    activityScenarioRule.getScenario().onActivity(activity -> assertThat(activity).isNotNull());
+  public void shouldDisplayMainScreenWithCorrectTitle() {
+    onView(withText("Android Gradle Template")).check(matches(isDisplayed()));
   }
 }
