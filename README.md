@@ -4,7 +4,7 @@
 [![build](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/build.yml/badge.svg)](https://github.com/jaredsburrows/android-gradle-java-app-template/actions/workflows/build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
-Gradle + Android Studio + Robolectric + Espresso + Mockito + EasyMock/PowerMock
+Gradle + Android Studio + Robolectric + Espresso + Mockito
 
 ## Technologies used:
 #### Build Tools:
