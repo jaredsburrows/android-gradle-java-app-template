@@ -45,7 +45,7 @@ jobs:
         run: ./gradlew testDebug -s
 
       - name: Cache AVD
-        uses: actions/cache@v4.0.0
+        uses: actions/cache@v4.0.1
         id: avd-cache
         with:
           path: |
