@@ -32,7 +32,7 @@ jobs:
           cache: gradle
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3.1.0
+        uses: gradle/actions/setup-gradle@v3.2.0
       - run: ./gradlew --version
 
       - name: Build Debug APK
