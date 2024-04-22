@@ -7,16 +7,15 @@ pluginManagement {
 }
 
 plugins {
-  id 'com.gradle.enterprise' version '3.17.2'
+  id 'com.gradle.develocity' version '3.17.2'
 }
 
-dependencyResolutionManagement {
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-
-  repositories {
-    mavenCentral()
-    google()
-    gradlePluginPortal()
+develocity {
+  buildScan {
+    termsOfUseUrl = 'https://gradle.com/terms-of-service'
+    termsOfUseAgree = 'yes'
+    def isCI = System.getenv('CI') != null
+    publishing.onlyIf { isCI }
   }
 }
 
