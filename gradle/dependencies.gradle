@@ -33,7 +33,7 @@ ext.deps = [
     'gps'        : [
         'ads'     : "com.google.android.gms:play-services-ads:23.1.0",
         'basement': "com.google.android.gms:play-services-basement:18.4.0",
-        'base'    : "com.google.android.gms:play-services-base:18.3.0",
+        'base'    : "com.google.android.gms:play-services-base:18.5.0",
     ],
     'junit'      : 'junit:junit:4.13.2',
     'assertj'    : 'org.assertj:assertj-core:3.26.0',
