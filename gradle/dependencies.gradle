@@ -25,7 +25,7 @@ ext.deps = [
                 'contrib': "androidx.test.espresso:espresso-contrib:$versions.espresso"
             ],
             'ext'     : [
-                'junit': 'androidx.test.ext:junit:1.1.5'
+                'junit': 'androidx.test.ext:junit:1.2.1'
             ]
         ]
     ],
