@@ -36,7 +36,7 @@ ext.deps = [
         'base'    : "com.google.android.gms:play-services-base:18.5.0",
     ],
     'junit'      : 'junit:junit:4.13.2',
-    'assertj'    : 'org.assertj:assertj-core:3.26.0',
+    'assertj'    : 'org.assertj:assertj-core:3.26.3',
     'mockito'    : [
         'inline': 'org.mockito:mockito-inline:5.2.0'
     ],
