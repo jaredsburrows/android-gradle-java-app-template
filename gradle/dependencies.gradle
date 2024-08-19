@@ -17,7 +17,7 @@ ext.deps = [
     'androidx'   : [
         'cardview': 'androidx.cardview:cardview:1.0.0',
         'test'    : [
-            'runner'  : 'androidx.test:runner:1.5.2',
+            'runner'  : 'androidx.test:runner:1.6.2',
             'rules'   : 'androidx.test:rules:1.5.0',
             'espresso': [
                 'core'   : "androidx.test.espresso:espresso-core:$versions.espresso",
