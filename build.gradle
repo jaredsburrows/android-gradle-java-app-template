@@ -10,7 +10,7 @@ buildscript {
   dependencies {
     classpath 'com.android.tools.build:gradle:8.4.1'
     classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0'
-    classpath 'com.github.triplet.gradle:play-publisher:1.2.2' // 3.9.0
+    classpath 'com.github.triplet.gradle:play-publisher:3.12.1' // 3.9.0
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.51.0'
   }
 }
